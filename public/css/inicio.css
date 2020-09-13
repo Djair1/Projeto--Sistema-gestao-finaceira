@@ -1,0 +1,63 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12/09/2020, 18:19:16
+    Author     : Buginha
+*/
+
+body{
+
+font-family: "Helvetica",	"Lucida	Grande",	sans-serif;
+padding-top: 120px;
+color: black;
+background: white;
+
+}
+
+#exampleInputEmail1, #exampleInputPassword1{
+
+width: 350px;
+height: 35px;
+
+
+}
+.container-xl{
+
+     
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center
+
+}
+
+img{
+
+
+padding-bottom: 20px;
+padding-left: 20px;
+}
+
+button{
+
+width: 100px;
+
+}
+
+#entrar{
+
+margin-left: 70px;
+margin-top: 10px;
+
+
+}
+
+#cadastro{
+margin-left: 5px;
+margin-top: 10px;
+color: white;
+}
+

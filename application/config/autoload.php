@@ -89,8 +89,8 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array();
-
+$autoload['helper'] = array('url');
+//definir como url para leitura dos arquivos "css" externos
 /*
 | -------------------------------------------------------------------
 |  Auto-load Config files
