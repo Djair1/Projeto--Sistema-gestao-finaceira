@@ -20,6 +20,44 @@ class Inicio extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('inicio');
+       $dados = array('aviso' => "" );
+       $this->load->view('inicio',$dados);
+ 
+	   
 	}
+
+	public function login()
+	{
+		//receber dados dentro de um array
+	 // $dados['informacoes'] = $this->input->post();
+	  $email = $this->input->post('text_email');
+	  $senha = $this->input->post('text_senha');
+
+	//  $tamanhoDoEmail = strlen($email);
+	  $tamanhoDaSenha = strlen($senha);
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      
+      $dados = array('aviso' =>"verificar o endereço de email inserido");
+
+	  	$this->load->view('inicio',$dados);
+
+}elseif ($tamanhoDaSenha<8 | $tamanhoDaSenha>32) {
+
+	  	$dados = array('aviso' =>"Sua senha deve conter no mínimo 8 caracteres (até 32)");
+
+	  	$this->load->view('inicio',$dados);
+	  
+ }else{
+
+     echo("perfeito");
+	  	
+	  }
+	  
+
+		
+	}
+
+
+
 }

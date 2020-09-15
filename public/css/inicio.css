@@ -43,19 +43,20 @@ padding-left: 20px;
 
 button{
 
-width: 100px;
+width: 165px;
+height: 40px;
 
 }
 
 #entrar{
-
-margin-left: 70px;
+margin-left: 5px;
 margin-top: 10px;
 
 
 }
 
 #cadastro{
+
 margin-left: 5px;
 margin-top: 10px;
 color: white;

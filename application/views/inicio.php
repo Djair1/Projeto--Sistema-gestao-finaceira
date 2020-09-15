@@ -24,16 +24,19 @@ and open the template in the editor.
     <body>
 
 <div class="container-xl">
-    <form class="form-signin">
+
+    <form class="form-signin" action="<?php echo site_url('inicio/login'); ?>  " method="post">
+
  <img src="<?php echo base_url('public/imagens/img1.png'); ?>"> 
+    
     <div class="form-group">
     <label for="exampleInputEmail1">Email</label>
-    <input type="email" placeholder="E-mail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="email" placeholder="E-mail" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
   </div>
   
   <div class="form-group">
     <label for="exampleInputPassword1">Senha</label>
-    <input type="password" placeholder="Senha" class="form-control" id="exampleInputPassword1">
+    <input type="password" placeholder="Senha" class="form-control" id="exampleInputPassword1" name="text_senha">
   </div>
   
   <div class="form-group form-check">
@@ -42,18 +45,32 @@ and open the template in the editor.
   </div>
   
   <!--<button type="submit" class="btn btn-primary">entrar</button>-->
-  <button id="entrar" type="button" class="btn btn-dark btn-sm">Entrar</button>
-  <button id="cadastro" type="button"  class="btn btn-warning btn-sm">Cadastre-se</button>
+  
+
+  <button id="entrar" type="submit" class="btn btn-dark btn-sm">Entrar</button>
+
+  <button id="cadastro" formaction="<?php echo site_url('welcome'); ?>" type="submit" class="btn btn-warning btn-sm">Cadastre-se</button>
+
 
 </form>
+
 
 </div>
   
         <?php
-        // put your code here
-        ?>
-   
 
+       if ($aviso!="") {
+
+          echo  "<script>alert('$aviso');</script>"; 
+       
+       }
+        
+       
+
+         
+ // echo  "<script>alert('$aviso');</script>";
+
+        ?>
 
    </body>
 
