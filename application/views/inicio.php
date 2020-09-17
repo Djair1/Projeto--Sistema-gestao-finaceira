@@ -49,7 +49,7 @@ and open the template in the editor.
 
   <button id="entrar" type="submit" class="btn btn-dark btn-sm">Entrar</button>
 
-  <button id="cadastro" formaction="<?php echo site_url('welcome'); ?>" type="submit" class="btn btn-warning btn-sm">Cadastre-se</button>
+  <button id="cadastro" formaction="<?php echo site_url('cadastro'); ?>" type="submit" class="btn btn-warning btn-sm">Cadastre-se</button>
 
 
 </form>

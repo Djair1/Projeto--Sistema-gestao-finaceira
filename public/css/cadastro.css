@@ -1,0 +1,38 @@
+#exampleInputEmail1,
+#exampleInputTelefone1,
+#exampleInputPassword1,
+#exampleInputPassword2{
+
+width: 350px;
+
+}
+
+.container-xl{
+
+        
+         margin-top:50px ;
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center
+
+}
+
+#entrar{
+
+margin-top:20px;
+margin-left: 75px;
+width: 195px;
+height: 40px;
+color: white;
+font-size: 18px;
+border: white;
+background: #FFA500;
+
+}
+
+img{
+
+margin-left: 20px;
+
+}
