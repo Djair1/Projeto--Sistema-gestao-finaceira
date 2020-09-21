@@ -13,7 +13,12 @@ body{
 font-family: "Helvetica",	"Lucida	Grande",	sans-serif;
 padding-top: 120px;
 color: black;
-background: white;
+height: 100%;
+background-position:top;
+background-repeat: repeat-y;
+background-size: cover;
+
+
 
 }
 
@@ -21,6 +26,8 @@ background: white;
 
 width: 350px;
 height: 35px;
+margin-left: 25px;
+border-radius: 8px;
 
 
 }
@@ -37,29 +44,41 @@ height: 35px;
 img{
 
 
-padding-bottom: 20px;
-padding-left: 20px;
+margin-top: 45px;
+margin-bottom: 25px;
+padding-left: 45px;
+
 }
 
 button{
 
-width: 165px;
-height: 40px;
+width: 170px;
+height: 45px;
 
 }
 
 #entrar{
-margin-left: 5px;
-margin-top: 10px;
-
-
+margin-left: 25px;
+margin-top: 15px;
+border-radius: 15px;
+background: #000000;
 }
 
 #cadastro{
 
 margin-left: 5px;
-margin-top: 10px;
+margin-top: 15px;
+border-radius: 15px;
 color: white;
 background: #FFA500;
 }
 
+#formulario{
+
+
+background-color:#F0F8FF ;
+border-radius: 15px;
+height:400px; 
+width: 400px;
+
+}

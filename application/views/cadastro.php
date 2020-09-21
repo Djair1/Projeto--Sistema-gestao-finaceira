@@ -18,33 +18,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
 </head>
-<body>
+<body background="<?php echo base_url('public/imagens/fundo_site.jpg'); ?>">
 
 	<div class="container-xl">
 
-    <form class="form-signin" action="<?php echo site_url('cadastro/cadastro_usuario'); ?>  " method="post">
+    <form id="formulario" class="form-signin" action="<?php echo site_url('cadastro/cadastro_usuario'); ?>  " method="post">
 
- <img src="<?php echo base_url('public/imagens/img1.png'); ?>"> 
+ <img src="<?php echo base_url('public/imagens/economize.png'); ?>"> 
     <br></br>
     <div class="form-group">
-    <label for="exampleInputEmail1">Email</label>
-    <input type="email" placeholder="Insira E-mail" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
+    <input type="email" placeholder="E-mail" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
     </div>
 
    <div class="form-group">
-    <label for="exampleInputTelefone1">Telefone</label>
-    <input type="Telefone" onkeypress="$(this).mask('(00) 0000-00009')" placeholder="Insira Telefone" class="form-control" id="exampleInputTelefone1" name="text_Telefone">
+    <input type="Telefone" onkeypress="$(this).mask('(00) 0000-00009')" placeholder="Telefone" class="form-control" id="exampleInputTelefone1" name="text_Telefone">
     </div>
 
     <div class="form-group">
-    <label for="exampleInputPassword1">Senha</label>
-    <input type="password" placeholder="Senha" class="form-control" id="exampleInputPassword1" name="text_senha">
+    <input type="password" maxlength="32" placeholder="Senha" class="form-control" id="exampleInputPassword1" name="text_senha">
     </div>
     
 
     <div class="form-group">
-    <label for="exampleInputPassword1">Confirmar Senha</label>
-    <input type="password" placeholder="Confirmar Senha" class="form-control" id="exampleInputPassword2" name="confirm_senha">
+    <input type="password" maxlength="32" placeholder="Confirmar Senha" class="form-control" id="exampleInputPassword2" name="confirm_senha">
     </div>
   
   
@@ -65,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
        if ($aviso!="") {
 
-        //  echo  "<script>alert('$aviso');</script>"; 
+        echo  "<script>alert('$aviso');</script>"; 
        
        }
 

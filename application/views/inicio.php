@@ -2,7 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
+
 <!--
+  <a href='https://br.freepik.com/vetores/fundo'>Fundo vetor criado por starline - br.freepik.com</a>
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
@@ -21,21 +23,20 @@ and open the template in the editor.
               
    
     </head>
-    <body>
+    <body background="<?php echo base_url('public/imagens/bg2.jpg');?>">
 
-<div class="container-xl">
+<div  class="container-xl">
 
-    <form class="form-signin" action="<?php echo site_url('inicio/login'); ?>  " method="post">
+    <form id="formulario"  class="form-signin" action="<?php echo site_url('inicio/login'); ?>  " method="post">
 
- <img src="<?php echo base_url('public/imagens/img1.png'); ?>"> 
+ <img src="<?php echo base_url('public/imagens/economize.png'); ?>"> 
     
     <div class="form-group">
-    <label for="exampleInputEmail1">Email</label>
+    
     <input type="email" placeholder="E-mail" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
   </div>
   
   <div class="form-group">
-    <label for="exampleInputPassword1">Senha</label>
     <input type="password" placeholder="Senha" class="form-control" id="exampleInputPassword1" name="text_senha">
   </div>
   
@@ -57,20 +58,19 @@ and open the template in the editor.
 
 </div>
   
-        <?php
+         <?php
 
        if ($aviso!="") {
 
           echo  "<script>alert('$aviso');</script>"; 
        
        }
-        
-       
-
-         
  // echo  "<script>alert('$aviso');</script>";
 
-        ?>
+        ?> 
+
+
+
 
    </body>
 

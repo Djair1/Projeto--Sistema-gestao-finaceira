@@ -33,18 +33,33 @@ class Inicio extends CI_Controller {
 	  $email = $this->input->post('text_email');
 	  $senha = $this->input->post('text_senha');
 
-	//  $tamanhoDoEmail = strlen($email);
+	  $tamanhoDoEmail = strlen($email);
 	  $tamanhoDaSenha = strlen($senha);
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+if ($tamanhoDoEmail==0) {
+
+	$dados = array('aviso' =>"Entre com o seu  Email !");
+
+	  	$this->load->view('inicio',$dados);
+
+}elseif ($tamanhoDaSenha==0) {
+	
+ $dados = array('aviso' =>"Entre com a sua Senha !");
+
+	  	$this->load->view('inicio',$dados);
+
+}elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       
       $dados = array('aviso' =>"verificar o endereço de email inserido");
 
 	  	$this->load->view('inicio',$dados);
 
+
 }elseif ($tamanhoDaSenha<8 | $tamanhoDaSenha>32) {
 
-	  	$dados = array('aviso' =>"Sua senha deve conter no mínimo 8 caracteres (até 32)");
+
+	  	$dados = array('aviso' =>"a senha possui no mínimo 8 caracteres (até 32)");
 
 	  	$this->load->view('inicio',$dados);
 	  
@@ -54,10 +69,8 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 	  	
 	  }
 	  
-
 		
 	}
-
 
 
 }
