@@ -58,16 +58,22 @@ height: 45px;
 }
 
 #entrar{
-margin-left: 25px;
+margin-left: 29px;
 margin-top: 15px;
+height: 40px;
+width: 170px;
+font-size: 16px;
 border-radius: 15px;
 background: #000000;
 }
 
 #cadastro{
 
-margin-left: 5px;
+margin-left: 2px;
 margin-top: 15px;
+height: 40px;
+width: 170px;
+font-size: 16px;
 border-radius: 15px;
 color: white;
 background: #FFA500;

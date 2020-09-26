@@ -26,7 +26,7 @@ class Cadastro extends CI_Controller {
 	   
 	}
 
-	public function cadastro_usuario()
+	public function Realizar_cadastro()
 	{
 		$email= $this->input->post('text_email');
 		$telefone= $this->input->post('text_Telefone');
@@ -92,26 +92,46 @@ $dados = array('aviso' =>"as senhas digitadas não correspondem !");
 
  }else{
 
-   $this->load->model('cadastromodel');
-   $this->cadastromodel->gravar_dados($email,$telefone,$senha);
-   
-   $busca = $this->cadastromodel->carregar_dados(); 
-
-foreach  ( $busca -> result_array ()  as  $row ) 
-{ 
- 
-
- echo  $row [ 'email' ].' - '. $row['telefone'].' - '. $row['senha']; 
- 
-
-}
-
-
-
+$this->cadastrar_usuario($email,$senha,$telefone);
 
      	}
 	
    }
 
 
+
+
+public function cadastrar_usuario($email,$senha,$telefone){
+
+$emailUtilizado=true;
+$this->load->model('usuariomodel');
+$busca = $this->usuariomodel->carregar_dados(); 
+
+   foreach  ( $busca -> result_array ()  as  $row ) {
+
+if ($row['email']== $email) {
+	
+	$dados = array('aviso' =>" endereco de email já cadastrado !");
+    $this->load->view('cadastro',$dados);
+    $emailUtilizado=false;
+
 }
+    }
+
+if ($emailUtilizado) {
+
+	$this->load->model('usuariomodel');
+    $this->usuariomodel->gravar_dados($email,$telefone,$senha);
+    echo("susseso");
+
+}
+   
+
+}
+
+
+
+
+}
+
+

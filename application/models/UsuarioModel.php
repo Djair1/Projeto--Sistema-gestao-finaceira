@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CadastroModel extends CI_Model {
+class UsuarioModel extends CI_Model {
 
 private $dados_user;
 

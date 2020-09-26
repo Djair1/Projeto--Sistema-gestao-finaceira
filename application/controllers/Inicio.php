@@ -65,7 +65,7 @@ if ($tamanhoDoEmail==0) {
 	  
  }else{
 
-     echo("perfeito");
+    $this->realizarLogin($email,$senha);
 	  	
 	  }
 	  
@@ -73,4 +73,39 @@ if ($tamanhoDoEmail==0) {
 	}
 
 
+	public function realizarLogin($email,$senha){
+		
+	//mostrar dados atraves de um foreach	
+    // echo  $row [ 'email' ].' - '. $row['telefone'].' - '. $row['senha']; 
+   $emailValido=true;
+   $this->load->model('usuariomodel');
+
+   //retornar dados salvos atraves do model cadastromodel
+   $busca = $this->usuariomodel->carregar_dados(); 
+
+   foreach  ( $busca -> result_array ()  as  $row ) 
+  { 
+ 
+if ($row['email']==$email & $row['senha']== $senha) {
+	
+	echo("susseso");
+	$emailValido=false;
+
+
+}elseif ($row['email']==$email & $row['senha']!= $senha) {
+	
+	$dados = array('aviso' => "senha incorreta");
+    $this->load->view('inicio',$dados);
+    $emailValido=false;
+}
+
+}
+
+if ($emailValido) {
+	
+	$dados = array('aviso' => "usuario nao encontrado");
+    $this->load->view('inicio',$dados);
+
+}
+	}
 }

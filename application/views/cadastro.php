@@ -22,9 +22,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div class="container-xl">
 
-    <form id="formulario" class="form-signin" action="<?php echo site_url('cadastro/cadastro_usuario'); ?>  " method="post">
-
- <img src="<?php echo base_url('public/imagens/economize.png'); ?>"> 
+    <form id="formulario" class="form-signin" action="<?php echo site_url('cadastro/Realizar_cadastro'); ?>  " method="post">
+<a href="<?php echo site_url('inicio'); ?>">
+    <img src="<?php echo base_url('public/imagens/economize.png'); ?>"> 
+    </a>
     <br></br>
     <div class="form-group">
     <input type="email" placeholder="E-mail" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
@@ -49,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
   </div>
   
-  <button id="entrar" type="submit" class="btn btn-dark btn-sm">Entrar</button>
+  <button id="entrar" type="submit" class="btn btn-dark btn-sm">Confirmar Cadastro</button>
   <!--<button type="submit" class="btn btn-primary">entrar</button>-->
   <!--<button id="cadastro" formaction="<?php echo site_url('welcome'); ?>" type="submit" class="btn btn-warning btn-sm">Cadastre-se</button>-->
 

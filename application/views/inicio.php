@@ -33,11 +33,11 @@ and open the template in the editor.
     
     <div class="form-group">
     
-    <input type="email" placeholder="E-mail" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
+    <input type="email" placeholder="E-mail" maxlength="32" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
   </div>
   
   <div class="form-group">
-    <input type="password" placeholder="Senha" class="form-control" id="exampleInputPassword1" name="text_senha">
+    <input type="password" placeholder="Senha" minlength="8" maxlength="32" class="form-control" id="exampleInputPassword1" name="text_senha">
   </div>
   
   <div class="form-group form-check">
