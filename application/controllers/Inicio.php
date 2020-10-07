@@ -78,10 +78,10 @@ if ($tamanhoDoEmail==0) {
 	//mostrar dados atraves de um foreach	
     // echo  $row [ 'email' ].' - '. $row['telefone'].' - '. $row['senha']; 
    $emailValido=true;
-   $this->load->model('usuariomodel');
+   $this->load->model('UsuarioModel');
 
    //retornar dados salvos atraves do model cadastromodel
-   $busca = $this->usuariomodel->carregar_dados(); 
+   $busca = $this->UsuarioModel->carregar_dados(); 
 
    foreach  ( $busca -> result_array ()  as  $row ) 
   { 

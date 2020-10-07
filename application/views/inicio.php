@@ -23,6 +23,7 @@ and open the template in the editor.
               
    
     </head>
+
     <body background="<?php echo base_url('public/imagens/bg2.jpg');?>">
 
 <div  class="container-xl">
@@ -46,11 +47,12 @@ and open the template in the editor.
   </div>
   
   <!--<button type="submit" class="btn btn-primary">entrar</button>-->
-  
 
   <button id="entrar" type="submit" class="btn btn-dark btn-sm">Entrar</button>
 
   <button id="cadastro" formaction="<?php echo site_url('cadastro'); ?>" type="submit" class="btn btn-warning btn-sm">Cadastre-se</button>
+
+<a href="<?php echo site_url('recuperarsenha'); ?>">Esqueceu a senha clique aqui</a>
 
 
 </form>
@@ -58,19 +60,14 @@ and open the template in the editor.
 
 </div>
   
-         <?php
+        <?php
 
        if ($aviso!="") {
 
           echo  "<script>alert('$aviso');</script>"; 
        
        }
- // echo  "<script>alert('$aviso');</script>";
-
         ?> 
-
-
-
 
    </body>
 

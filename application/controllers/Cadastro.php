@@ -104,8 +104,8 @@ $this->cadastrar_usuario($email,$senha,$telefone);
 public function cadastrar_usuario($email,$senha,$telefone){
 
 $emailUtilizado=true;
-$this->load->model('usuariomodel');
-$busca = $this->usuariomodel->carregar_dados(); 
+$this->load->model('UsuarioModel');
+$busca = $this->UsuarioModel->carregar_dados(); 
 
    foreach  ( $busca -> result_array ()  as  $row ) {
 
@@ -120,8 +120,8 @@ if ($row['email']== $email) {
 
 if ($emailUtilizado) {
 
-	$this->load->model('usuariomodel');
-    $this->usuariomodel->gravar_dados($email,$telefone,$senha);
+	$this->load->model('UsuarioModel');
+    $this->UsuarioModel->gravar_dados($email,$telefone,$senha);
     echo("susseso");
 
 }

@@ -60,6 +60,7 @@ height: 45px;
 #entrar{
 margin-left: 29px;
 margin-top: 15px;
+margin-bottom: 30px;
 height: 40px;
 width: 170px;
 font-size: 16px;
@@ -71,6 +72,7 @@ background: #000000;
 
 margin-left: 2px;
 margin-top: 15px;
+margin-bottom: 30px;
 height: 40px;
 width: 170px;
 font-size: 16px;
@@ -87,4 +89,10 @@ border-radius: 15px;
 height:400px; 
 width: 400px;
 
+}
+
+a{
+margin-left: 185px;
+color: green;
+font-size: 14px;
 }
