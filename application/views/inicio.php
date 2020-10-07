@@ -3,12 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 
-<!--
-  <a href='https://br.freepik.com/vetores/fundo'>Fundo vetor criado por starline - br.freepik.com</a>
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
     
@@ -16,15 +10,42 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Conectar</title>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/inicio.css'); ?>">
-         
-              
-   
+        
     </head>
 
-    <body background="<?php echo base_url('public/imagens/bg2.jpg');?>">
+    <body background="<?php echo base_url('public/imagens/fundo_site.jpg');?>">
+
+<div>
+  
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="<?php echo site_url('inicio'); ?>">Economize</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link active" href="<?php echo site_url('inicio'); ?>">Inicio<span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="<?php echo site_url('cadastro');?>">Cadastre-se</a>
+     <!-- <a class="nav-link" href="#">Pricing</a>
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+    </div>
+  </div>
+</nav>
+
+
+</div>
+
+
+
 
 <div  class="container-xl">
 
@@ -41,18 +62,9 @@ and open the template in the editor.
     <input type="password" placeholder="Senha" minlength="8" maxlength="32" class="form-control" id="exampleInputPassword1" name="text_senha">
   </div>
   
-  <div class="form-group form-check">
-   <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-  </div>
-  
-  <!--<button type="submit" class="btn btn-primary">entrar</button>-->
-
   <button id="entrar" type="submit" class="btn btn-dark btn-sm">Entrar</button>
 
-  <button id="cadastro" formaction="<?php echo site_url('cadastro'); ?>" type="submit" class="btn btn-warning btn-sm">Cadastre-se</button>
-
-<a href="<?php echo site_url('recuperarsenha'); ?>">Esqueceu a senha clique aqui</a>
+<a id="esq" href="<?php echo site_url('recuperarsenha'); ?>">Esqueceu a senha clique aqui</a>
 
 
 </form>

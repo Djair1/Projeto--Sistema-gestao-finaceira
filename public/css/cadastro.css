@@ -1,3 +1,20 @@
+
+
+
+body{
+
+font-family: "Helvetica",	"Lucida	Grande",	sans-serif;
+color: black;
+height: 100%;
+background-position:top;
+background-repeat: repeat-y;
+background-size: cover;
+
+
+
+}
+
+
 #exampleInputEmail1,
 #exampleInputTelefone1,
 #exampleInputPassword1,
@@ -9,10 +26,9 @@ border-radius: 8px;
 
 }
 
+
 .container-xl{
 
-        
-         margin-top:50px ;
          display: flex;
          flex-direction: row;
          justify-content: center;
@@ -22,14 +38,14 @@ border-radius: 8px;
 
 #entrar{
 
-margin-top:8px;
-margin-left: 100px;
-width: 195px;
-height: 40px;
+margin-top:5px;
+margin-left:25px;
+height:35px;
+width: 350px;
 color: white;
 font-size: 16px;
 border: white;
-border-radius: 10px;
+border-radius: 15px;
 background: #FFA500;
 
 }
@@ -40,15 +56,6 @@ margin-left: 45px;
 
 }
 
-body{
-
-
-background-position:top;
-background-repeat: repeat-y;
-background-size: cover;
-
-
-}
 #formulario{
 margin-top: 90px;
 border-radius: 25px ;

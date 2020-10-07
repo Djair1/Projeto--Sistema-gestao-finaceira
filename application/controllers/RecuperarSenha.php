@@ -63,7 +63,7 @@ public function enviar_email($email)
 	
 $this->load->library('email');
 
-$this->email->from('teste@gmail.com', 'Desenvolvedor');
+$this->email->from('example@example.com', 'Desenvolvedor');
 $this->email->to($email);
 //$this->email->cc('another@another-example.com');
 //$this->email->bcc('them@their-example.com');

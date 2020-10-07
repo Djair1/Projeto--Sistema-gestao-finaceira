@@ -11,7 +11,6 @@ and open the template in the editor.
 body{
 
 font-family: "Helvetica",	"Lucida	Grande",	sans-serif;
-padding-top: 120px;
 color: black;
 height: 100%;
 background-position:top;
@@ -58,32 +57,21 @@ height: 45px;
 }
 
 #entrar{
-margin-left: 29px;
-margin-top: 15px;
+margin-left: 25px;
+margin-top: 10px;
 margin-bottom: 30px;
-height: 40px;
-width: 170px;
+height: 35px;
+width: 350px;
 font-size: 16px;
 border-radius: 15px;
 background: #000000;
 }
 
-#cadastro{
 
-margin-left: 2px;
-margin-top: 15px;
-margin-bottom: 30px;
-height: 40px;
-width: 170px;
-font-size: 16px;
-border-radius: 15px;
-color: white;
-background: #FFA500;
-}
 
 #formulario{
 
-
+margin-top: 100px;
 background-color:#F0F8FF ;
 border-radius: 15px;
 height:400px; 
@@ -91,8 +79,8 @@ width: 400px;
 
 }
 
-a{
-margin-left: 185px;
+#esq{
+margin-left: 180px;
 color: green;
 font-size: 14px;
 }

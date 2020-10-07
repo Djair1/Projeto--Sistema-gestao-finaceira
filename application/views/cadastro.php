@@ -20,6 +20,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body background="<?php echo base_url('public/imagens/fundo_site.jpg'); ?>">
 
+
+
+<div>
+  
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="<?php echo site_url('inicio'); ?>">Economize</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link active" href="<?php echo site_url('inicio'); ?>">Inicio<span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="<?php echo site_url('cadastro');?>">Cadastre-se</a>
+     <!-- <a class="nav-link" href="#">Pricing</a>
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+    </div>
+  </div>
+</nav>
+
+
+</div>
+
+
+
 	<div class="container-xl">
 
     <form id="formulario" class="form-signin" action="<?php echo site_url('cadastro/Realizar_cadastro'); ?>  " method="post">
