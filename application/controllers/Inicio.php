@@ -18,16 +18,35 @@ class Inicio extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+    
+
+
+
 	public function index()
 	{
-       $dados = array('aviso' => "" );
+      
+
+       $user = $this->session->userdata("usuario");
+       
+       $usersize = strlen($user);
+
+       if ($usersize > 0) {
+		
+		redirect('Painel');
+
+	}else{
+
+	   $dados = array('aviso' => "" );
        $this->load->view('inicio',$dados);
- 
-	   
+
 	}
 
-	public function login()
-	{
+
+	}
+
+
+
+    public function login(){
 		//receber dados dentro de um array
 	 // $dados['informacoes'] = $this->input->post();
 	  $email = $this->input->post('text_email');
@@ -39,73 +58,57 @@ class Inicio extends CI_Controller {
 
 if ($tamanhoDoEmail==0) {
 
-	$dados = array('aviso' =>"Entre com o seu  Email !");
+	$dados = array('aviso' =>"");
 
 	  	$this->load->view('inicio',$dados);
 
 }elseif ($tamanhoDaSenha==0) {
 	
- $dados = array('aviso' =>"Entre com a sua Senha !");
+ $dados = array('aviso' =>"");
 
 	  	$this->load->view('inicio',$dados);
 
 }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
       
-      $dados = array('aviso' =>"verificar o endereço de email inserido");
+      $dados = array('aviso' =>"formato de email invalido!");
 
 	  	$this->load->view('inicio',$dados);
 
 
-}elseif ($tamanhoDaSenha<8 | $tamanhoDaSenha>32) {
+}else{
 
 
-	  	$dados = array('aviso' =>"a senha possui no mínimo 8 caracteres (até 32)");
-
-	  	$this->load->view('inicio',$dados);
-	  
- }else{
-
-    $this->realizarLogin($email,$senha);
-	  	
-	  }
-	  
-		
-	}
-
-
-	public function realizarLogin($email,$senha){
-		
-	//mostrar dados atraves de um foreach	
-    // echo  $row [ 'email' ].' - '. $row['telefone'].' - '. $row['senha']; 
-   $emailValido=true;
    $this->load->model('UsuarioModel');
 
    //retornar dados salvos atraves do model cadastromodel
    $busca = $this->UsuarioModel->carregar_dados(); 
 
-   foreach  ( $busca -> result_array ()  as  $row ) 
-  { 
- 
-if ($row['email']==$email & $row['senha']== $senha) {
-	
-	echo("susseso");
-	$emailValido=false;
+   foreach  ( $busca -> result_array ()  as  $row ){
+
+   	if (password_verify($senha, $row['senha']) & $row['email'] == $email){
+
+   $id = $row['id_usuario'];
 
 
-}elseif ($row['email']==$email & $row['senha']!= $senha) {
-	
-	$dados = array('aviso' => "senha incorreta");
+    //variavel de sessao
+   $this->session->set_userdata("usuario", $email);
+   $this->session->set_userdata("id", $id);
+   $email = ""; $senha = "";
+
+    redirect('Painel');
+
+
+}else{
+
+    $dados = array('aviso' => "Verificar E-mail /ou senha inseridos");
     $this->load->view('inicio',$dados);
     $emailValido=false;
-}
 
-}
 
-if ($emailValido) {
-	
-	$dados = array('aviso' => "usuario nao encontrado");
-    $this->load->view('inicio',$dados);
+                }
+           } 
+       }
 
-}
-	}
+   }
+
 }

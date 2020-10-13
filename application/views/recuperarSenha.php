@@ -22,25 +22,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div>
   
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="<?php echo site_url('inicio'); ?>">Economize</a>
+  <a id="titulo" class="navbar-brand" href="<?php echo site_url('inicio'); ?>">Economize</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-link active" href="<?php echo site_url('inicio'); ?>">Inicio<span class="sr-only">(current)</span></a>
-      <a class="nav-link" href="<?php echo site_url('cadastro');?>">Cadastre-se</a>
+      <a id="in" class="nav-link active" href="<?php echo site_url('inicio'); ?>">Inicio<span class="sr-only">(current)</span></a>
+      <a id="ca" class="nav-link" href="<?php echo site_url('cadastro');?>">Cadastre-se</a>
      <!-- <a class="nav-link" href="#">Pricing</a>
       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
     </div>
   </div>
 </nav>
-
-
+<div id="container-xl" class="alert alert-warning alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Warning! </strong>" Digite o seu email cadastrado abaixo e voçe recebera a sua senha de acesso ao sistema em seu email."
 </div>
 
 <div id="container-xl">
-  
 <form id="formulario"  class="form-signin" action="<?php echo site_url('recuperarSenha/buscarUsuario'); ?>  " method="post">
 
 	<a href="<?php echo site_url('inicio'); ?>">
@@ -49,31 +49,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     <div class="form-group">
     
-    <input type="email" placeholder="Insira o seu email" maxlength="32" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
+    <input type="E-mail" onclick="ola();" placeholder="Insira o seu email" maxlength="32" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
   </div>
   
   <button id="enviar" type="submit" class="btn btn-dark btn-sm">Enviar</button>
 
 </form>
 
-
   </div>
-
-
- <?php
-
-       if ($aviso!="") {
-
-          echo  "<script>alert('$aviso');</script>"; 
-       
-       }
-        ?> 
 
 <script type="text/javascript">
   
-alert("Entre com o seu email cadastrado abaixo e voçe recebera a sua senha de acesso ao sistema .");
-
-
+function ola() {
+  $('.alert-warning').alert('close');
+}
 
 
 </script>

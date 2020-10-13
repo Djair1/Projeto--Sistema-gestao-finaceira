@@ -18,11 +18,25 @@ class Cadastro extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
-       $dados = array('aviso' => "" );
+	public function index(){
+
+	   $user = $this->session->userdata("usuario");
+       
+       $usersize = strlen($user);
+
+       if ($usersize > 0) {
+		
+		redirect('Painel');
+
+	}else{
+
+	  $dados = array('aviso' => "" );
        $this->load->view('cadastro',$dados);
- 
+
+	}
+
+
+
 	   
 	}
 
@@ -103,7 +117,7 @@ $this->cadastrar_usuario($email,$senha,$telefone);
 
 public function cadastrar_usuario($email,$senha,$telefone){
 
-$emailUtilizado=true;
+$Utilizado=true;
 $this->load->model('UsuarioModel');
 $busca = $this->UsuarioModel->carregar_dados(); 
 
@@ -113,21 +127,65 @@ if ($row['email']== $email) {
 	
 	$dados = array('aviso' =>" endereco de email já cadastrado !");
     $this->load->view('cadastro',$dados);
-    $emailUtilizado=false;
+    $Utilizado=false;
 
 }
     }
 
-if ($emailUtilizado) {
+if ($Utilizado) {
 
+try {
+
+//criptografar a senha do usuario
+$senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT); 
+
+//mandando dados pro Usuariomodel
 	$this->load->model('UsuarioModel');
-    $this->UsuarioModel->gravar_dados($email,$telefone,$senha);
-    echo("susseso");
+    $this->UsuarioModel->gravar_dados($email,$telefone,$senhaCriptografada);
+
+    $email=""; $telefone=""; $senha=""; $senhaConfirmada="";
+
+    $dados = array('susseso' => "Cadastro realizado com susesso ");
+
+	$this->load->view('inicio',$dados);
+	
+} catch (Exception $e) {
+
+	$dados = array('aviso' => "Erro ao realizar o Cadastro ".$e);
+
+	$this->load->view('inicio',$dados);
+	
+}
+
+	
 
 }
    
 
 }
+
+
+//private function carregar_painel($email){
+
+//$this->load->model('UsuarioModel');
+//$busca = $this->UsuarioModel->carregar_dados(); 
+
+	
+//foreach  ( $busca -> result_array ()  as  $row ){
+
+//if ($row['email'] == $email) {
+	
+
+//	$dados = array('susseso' => "Cadastro realizado com susesso ");
+
+//	$this->load->view('inicio',$dados);
+
+
+//}
+
+//}
+
+//}
 
 
 

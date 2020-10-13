@@ -5,9 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <html>
     <head>
-    
 
-        <meta charset="UTF-8">
         <title>Conectar</title>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -24,17 +22,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <body background="<?php echo base_url('public/imagens/fundo_site.jpg');?>">
 
+    <?php unset($_POST['']); ?>
+
 <div>
   
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="<?php echo site_url('inicio'); ?>">Economize</a>
+  <a id="titulo" class="navbar-brand" href="<?php echo site_url('inicio'); ?>">Economize</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-link active" href="<?php echo site_url('inicio'); ?>">Inicio<span class="sr-only">(current)</span></a>
-      <a class="nav-link" href="<?php echo site_url('cadastro');?>">Cadastre-se</a>
+      <a id="in" class="nav-link active" href="<?php echo site_url('inicio'); ?>">Inicio<span class="sr-only">(current)</span></a>
+      <a id="ca" class="nav-link" href="<?php echo site_url('cadastro');?>">Cadastre-se</a>
      <!-- <a class="nav-link" href="#">Pricing</a>
       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
     </div>
@@ -43,23 +43,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 </div>
+<div class="alert alert-warning">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Warning!</strong><?php if ($aviso!="") {echo " ".$aviso; }else{
+  echo"<script> $('.alert-warning').alert('close');</script> ";
+  }?>
+</div>
+<div class="alert alert-success">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Success!</strong><?php if ($susseso!="") {echo " ".$susseso; }else{
+  echo"<script> $('.alert-success').alert('close');</script> ";
+  }?>
+</div>
+ 
 
 
-
-
-<div  class="container-xl">
+<div onclick="aviso();" class="container-xl">
 
     <form id="formulario"  class="form-signin" action="<?php echo site_url('inicio/login'); ?>  " method="post">
 
  <img src="<?php echo base_url('public/imagens/economize.png'); ?>"> 
     
     <div class="form-group">
-    
-    <input type="email" placeholder="E-mail" maxlength="32" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
+    <input type="E-mail" placeholder="E-mail" class="form-control" id="exampleInputEmail1" name="text_email" aria-describedby="emailHelp">
   </div>
   
   <div class="form-group">
-    <input type="password" placeholder="Senha" minlength="8" maxlength="32" class="form-control" id="exampleInputPassword1" name="text_senha">
+    <input type="password" placeholder="Senha" class="form-control" id="exampleInputPassword1" name="text_senha">
   </div>
   
   <button id="entrar" type="submit" class="btn btn-dark btn-sm">Entrar</button>
@@ -71,15 +81,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 </div>
-  
-        <?php
 
-       if ($aviso!="") {
 
-          echo  "<script>alert('$aviso');</script>"; 
-       
-       }
-        ?> 
+
+<script type="text/javascript">
+ 
+  //history.forward();
+
+function aviso() {
+  $('.alert-warning').alert('close');
+   $('.alert-success').alert('close');
+}
+
+
+</script>
 
    </body>
 

@@ -14,7 +14,7 @@ font-family: "Helvetica",	"Lucida	Grande",	sans-serif;
 color: black;
 height: 100%;
 background-position:top;
-background-repeat: repeat-y;
+background-repeat: no-repeat;
 background-size: cover;
 
 
@@ -83,4 +83,21 @@ width: 400px;
 margin-left: 180px;
 color: green;
 font-size: 14px;
+}
+
+#in ,#ca{
+
+font-family: serif;
+font-style: italic;
+font-size: 16px;
+
+}
+
+#titulo{
+
+font-family: Showcard Gothic;
+font-size: 25px;
+padding-left: 10px;
+padding-right: 15px;
+
 }
