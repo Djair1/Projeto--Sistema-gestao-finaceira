@@ -20,24 +20,24 @@ class Cadastro extends CI_Controller {
 	 */
 	public function index(){
 
-	   $user = $this->session->userdata("usuario");
-       
-       $usersize = strlen($user);
+		$user = $this->session->userdata("usuario");
 
-       if ($usersize > 0) {
-		
-		redirect('Painel');
+		$usersize = strlen($user);
 
-	}else{
+		if ($usersize > 0) {
 
-	  $dados = array('aviso' => "" );
-       $this->load->view('cadastro',$dados);
+			redirect('Painel');
 
-	}
+		}else{
+
+			$dados = array('aviso' => "");
+			$this->load->view('cadastro',$dados);
+
+		}
 
 
 
-	   
+
 	}
 
 	public function Realizar_cadastro()
@@ -47,149 +47,148 @@ class Cadastro extends CI_Controller {
 		$senha= $this->input->post('text_senha');
 		$senhaConfirmada=$this->input->post('confirm_senha');
 
-        $tamanhoDoEmail = strlen($email);
-        $tamanhoTelefone = strlen($telefone);
-        $tamanhoSenha= strlen($senha);
-        $tamanhoSenhaConfirmada= strlen($senhaConfirmada);
+		$tamanhoDoEmail = strlen($email);
+		$tamanhoTelefone = strlen($telefone);
+		$tamanhoSenha= strlen($senha);
+		$tamanhoSenhaConfirmada= strlen($senhaConfirmada);
 
 
-if ($tamanhoDoEmail==0) {
+		if ($tamanhoDoEmail==0) {
 
-	$dados = array('aviso' =>"Definir endereço de Email !");
+			$info = "Definir endereço de Email !";
+            $this->erro_cadastro($info);
 
-	  	$this->load->view('cadastro',$dados);
-
-}elseif ($tamanhoTelefone==0) {
-
-$dados = array('aviso' =>"Defina um numero de telefone !");
-
-	 	$this->load->view('cadastro',$dados);
-
-}elseif ( $tamanhoTelefone < 15 ) {
-
-$dados = array('aviso' =>"numero de telefone inválido !");
-
-	 	$this->load->view('cadastro',$dados);
-
-}elseif ($tamanhoSenha==0) {
-	
- $dados = array('aviso' =>"Defina sua Senha !");
-
-	 	$this->load->view('cadastro',$dados);
-
-}elseif ($tamanhoSenhaConfirmada==0) {
-
-	 $dados = array('aviso' =>"Confirme sua Senha !");
-
-	  	$this->load->view('cadastro',$dados);
-	
-
-	}elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      
-      $dados = array('aviso' =>"verificar o endereço de email inserido");
-
-		$this->load->view('cadastro',$dados);
+		}elseif ($tamanhoTelefone==0) {
 
 
-}elseif ($tamanhoSenha<8 | $tamanhoSenha>32) {
+			$info = "Inserir um numero de telefone !";
 
-	  	$dados = array('aviso' =>"Sua senha deve conter no mínimo 8 caracteres (até 32)");
-
-		$this->load->view('cadastro',$dados);
-	  
- }elseif ($senha != $senhaConfirmada) {
+			$this->erro_cadastro($info);
 
 
-$dados = array('aviso' =>"as senhas digitadas não correspondem !");
+		}elseif ( $tamanhoTelefone < 15 ) {
 
-	  	$this->load->view('cadastro',$dados);
+			$info = "numero de telefone inválido !";
 
- }else{
+			$this->erro_cadastro($info);
 
-$this->cadastrar_usuario($email,$senha,$telefone);
-
-     	}
-	
-   }
+		}elseif ($tamanhoSenha==0) {
 
 
+			$info = "Defina sua Senha !";
+
+			$this->erro_cadastro($info);
 
 
-public function cadastrar_usuario($email,$senha,$telefone){
+		}elseif ($tamanhoSenhaConfirmada==0) {
 
-$Utilizado=true;
-$this->load->model('UsuarioModel');
-$busca = $this->UsuarioModel->carregar_dados(); 
+			$info = "Confirme sua Senha !";
 
-   foreach  ( $busca -> result_array ()  as  $row ) {
+			$this->erro_cadastro($info);
 
-if ($row['email']== $email) {
-	
-	$dados = array('aviso' =>" endereco de email já cadastrado !");
-    $this->load->view('cadastro',$dados);
-    $Utilizado=false;
+		}elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-}
-    }
+			$info = "verificar o endereço de email inserido";
 
-if ($Utilizado) {
+			$this->erro_cadastro($info);
 
-try {
+		}elseif ($tamanhoSenha<8 | $tamanhoSenha>32) {
+
+			$info = "Sua senha deve conter no mínimo 8 caracteres (até 32)";
+
+			$this->erro_cadastro($info);
+
+		}elseif ($senha != $senhaConfirmada) {
+
+			$info = "as senhas digitadas não correspondem !";
+
+			$this->erro_cadastro($info);
+
+		}else{
+
+			$this->cadastrar_usuario($email,$senha,$telefone);
+			
+		}
+
+	}
+
+
+	public function cadastrar_usuario($email,$senha,$telefone){
+
+		$of = true;
+		$this->load->model('UsuarioModel');
+		$busca = $this->UsuarioModel->carregar_dados(); 
+
+		foreach  ( $busca -> result_array ()  as  $row ) {
+
+			if ($of & $row['email']== $email) {
+
+
+				$info = " endereco de email já cadastrado !";
+				$this->erro_cadastro($info);
+				$of=false;
+
+			}elseif ($of & password_verify($senha, $row['senha'])) {
+				$info = " Senha fraca insira uma senha melhor!";
+				$this->erro_cadastro($info);
+				$of=false;
+			}
+		}
+
+		if ($of) {
+
+			try {
 
 //criptografar a senha do usuario
-$senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT); 
+				$senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT); 
 
 //mandando dados pro Usuariomodel
-	$this->load->model('UsuarioModel');
-    $this->UsuarioModel->gravar_dados($email,$telefone,$senhaCriptografada);
+				$this->load->model('UsuarioModel');
+				$this->UsuarioModel->gravar_dados($email,$telefone,$senhaCriptografada);
 
-    $email=""; $telefone=""; $senha=""; $senhaConfirmada="";
+				$dados = array('aviso' => "",'susseso'=>"Cadastro Realizado com susseso !");
+				$this->load->view('inicio',$dados);
 
-    $dados = array('susseso' => "Cadastro realizado com susesso ");
+			} catch (Exception $e) {
 
-	$this->load->view('inicio',$dados);
+				$info = "Erro ao realizar o Cadastro ";
+				$this->erro_cadastro($info);
+
+			}
+
+
+
+		}
+
+
+	}
+
+public function erro_cadastro($erro){
 	
-} catch (Exception $e) {
+$user = $this->session->userdata("usuario");
 
-	$dados = array('aviso' => "Erro ao realizar o Cadastro ".$e);
+		$usersize = strlen($user);
 
-	$this->load->view('inicio',$dados);
-	
-}
+		if ($usersize > 0) {
 
-	
+			redirect('Painel');
 
-}
-   
+		}else{
 
-}
+			$dados = array('aviso' => $erro);
+			$this->load->view('cadastro',$dados);
 
-
-//private function carregar_painel($email){
-
-//$this->load->model('UsuarioModel');
-//$busca = $this->UsuarioModel->carregar_dados(); 
-
-	
-//foreach  ( $busca -> result_array ()  as  $row ){
-
-//if ($row['email'] == $email) {
-	
-
-//	$dados = array('susseso' => "Cadastro realizado com susesso ");
-
-//	$this->load->view('inicio',$dados);
-
-
-//}
-
-//}
-
-//}
-
-
+		}
 
 
 }
+
+
+}
+
+
+
+
+
 
 

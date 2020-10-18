@@ -22,41 +22,77 @@ class Painel extends CI_Controller {
 
 
 	
-public function index(){
+	public function index($aviso=""){
+
+		$id = $this->session->userdata("id");
+
+		$email = $this->session->userdata("usuario");
 
 
+		if (strlen($email)!=0) {
+			
+			$dados = array('email' => $email,'aviso' => $aviso);
 
-$id = $this->session->userdata("id");
-
-$email = $this->session->userdata("usuario");
-
-
-if (strlen($email)!=0) {
-	
-$dados = array('email' => $email);
-
-$this->load->view('painel',$dados);
+			$this->load->view('painel',$dados);
 
 
-}else{
+		}else{
 
 
-redirect('Inicio');
+			redirect('Inicio');
 
 
-}
+		}
 
-}
+	}
 
 
- public function sair(){
+	public function sair(){
 		
 
-			$this->session->set_userdata("id", "");
-            $this->session->set_userdata("usuario", "");
-            redirect('Inicio');
+		$this->session->set_userdata("id", "");
+		$this->session->set_userdata("usuario", "");
+		redirect('Inicio');
 		
 
 	}
 
+
+	public function alterarSenha(){
+		
+		$senhaA= $this->input->post('senhaA');
+		$senhaB= $this->input->post('senhaB');
+		$senhaC=$this->input->post('senhaC');
+
+
+        $this->load->model('UsuarioModel');
+		$busca = $this->UsuarioModel->carregar_dados(); 
+
+		foreach  ( $busca -> result_array ()  as  $row ){
+
+        if (password_verify($senhaA, $row['senha'])) {
+ 	
+
+
+
+
+           }
+
+
+		}
+
+
+
+
+
+
+
+		$info="erro ao atualizar senha";
+
+		$this->index($info);
+
 	}
+
+
+
+}

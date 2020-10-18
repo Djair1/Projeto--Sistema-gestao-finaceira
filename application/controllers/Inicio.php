@@ -18,97 +18,115 @@ class Inicio extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-    
+	
 
 
 
-	public function index()
-	{
-      
-
-       $user = $this->session->userdata("usuario");
-       
-       $usersize = strlen($user);
-
-       if ($usersize > 0) {
+	public function index($aviso=""){
 		
-		redirect('Painel');
 
-	}else{
+		$user = $this->session->userdata("usuario");
+		
+		$usersize = strlen($user);
 
-	   $dados = array('aviso' => "" );
-       $this->load->view('inicio',$dados);
+		if ($usersize > 0) {
+			
+			redirect('Painel');
+
+		}else{
+
+			$dados = array('aviso' => $aviso,'susseso'=>"");
+			$this->load->view('inicio',$dados);
+
+		}
+
 
 	}
 
 
-	}
 
-
-
-    public function login(){
+	public function login(){
 		//receber dados dentro de um array
 	 // $dados['informacoes'] = $this->input->post();
-	  $email = $this->input->post('text_email');
-	  $senha = $this->input->post('text_senha');
+		$email = $this->input->post('text_email');
+		$senha = $this->input->post('text_senha');
 
-	  $tamanhoDoEmail = strlen($email);
-	  $tamanhoDaSenha = strlen($senha);
-
-
-if ($tamanhoDoEmail==0) {
-
-	$dados = array('aviso' =>"");
-
-	  	$this->load->view('inicio',$dados);
-
-}elseif ($tamanhoDaSenha==0) {
-	
- $dados = array('aviso' =>"");
-
-	  	$this->load->view('inicio',$dados);
-
-}elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      
-      $dados = array('aviso' =>"formato de email invalido!");
-
-	  	$this->load->view('inicio',$dados);
+		$tamanhoDoEmail = strlen($email);
+		$tamanhoDaSenha = strlen($senha);
 
 
-}else{
+		if ($tamanhoDoEmail==0) {
 
 
-   $this->load->model('UsuarioModel');
+            redirect('Inicio');
+			
+
+		}elseif ($tamanhoDaSenha==0) {
+			
+			redirect('Inicio');
+
+		}elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+             redirect('Inicio');
+
+
+		}else{
+
+			$alerta = true;
+			$this->load->model('UsuarioModel');
 
    //retornar dados salvos atraves do model cadastromodel
-   $busca = $this->UsuarioModel->carregar_dados(); 
+			$busca = $this->UsuarioModel->carregar_dados(); 
 
-   foreach  ( $busca -> result_array ()  as  $row ){
+			foreach  ( $busca -> result_array ()  as  $row ){
 
-   	if (password_verify($senha, $row['senha']) & $row['email'] == $email){
+				if (password_verify($senha, $row['senha']) & $row['email'] == $email){
 
-   $id = $row['id_usuario'];
+					$id = $row['id_usuario'];
 
 
     //variavel de sessao
-   $this->session->set_userdata("usuario", $email);
-   $this->session->set_userdata("id", $id);
-   $email = ""; $senha = "";
+					$this->session->set_userdata("usuario", $email);
+					$this->session->set_userdata("id", $id);
+					$email = ""; $senha = "";
 
-    redirect('Painel');
-
-
-}else{
-
-    $dados = array('aviso' => "Verificar E-mail /ou senha inseridos");
-    $this->load->view('inicio',$dados);
-    $emailValido=false;
+					redirect('Painel');
 
 
-                }
-           } 
-       }
+				}else{
 
-   }
+					if ($alerta) {
+						redirect('Inicio/erro_login');
+						$alerta=false;
+					}
+
+				}
+			} 
+		}
+
+	}
+
+
+public function erro_login(){
+	
+$user = $this->session->userdata("usuario");
+		
+		$usersize = strlen($user);
+
+		if ($usersize > 0) {
+			
+			redirect('Painel');
+
+		}else{
+
+			$info ="Verificar E-mail /ou senha inseridos";
+
+            $dados = array('aviso' => $info,'susseso'=>"");
+			$this->load->view('inicio',$dados);
+		}
+
+
+}
+
 
 }
