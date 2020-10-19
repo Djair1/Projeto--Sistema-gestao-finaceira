@@ -63,36 +63,47 @@ class Painel extends CI_Controller {
 		$senhaA= $this->input->post('senhaA');
 		$senhaB= $this->input->post('senhaB');
 		$senhaC=$this->input->post('senhaC');
+		$email = $this->session->userdata("usuario");
+		$id = $this->session->userdata("id");
+		$this->load->model('UsuarioModel');
+		$ouvinte=true;
+		
 
 
-        $this->load->model('UsuarioModel');
 		$busca = $this->UsuarioModel->carregar_dados(); 
 
 		foreach  ( $busca -> result_array ()  as  $row ){
 
-        if (password_verify($senhaA, $row['senha'])) {
- 	
+			if ($senhaA == $senhaB) {
+
+				if (password_verify($senhaA, $row['senha']) & $row['email'] == $email){
+
+					$senhaCRT = password_hash($senhaC, PASSWORD_BCRYPT);
+					$this->UsuarioModel->alterar_senha($senhaCRT,$id);
+					redirect('Painel');
+					$ouvinte=false;
 
 
+				} 
+			}
+		}
 
-
-           }
-
-
+		if($senhaA != $senhaB){
+			$info="a nova senha nao correspode na confirmação";
+			$this->index($info);
+			$ouvinte=false;
 		}
 
 
 
 
+		if ($ouvinte) {
 
+			$info="Erro ao atualizar senha";
+			$this->index($info);
 
-
-		$info="erro ao atualizar senha";
-
-		$this->index($info);
+		}
 
 	}
-
-
 
 }

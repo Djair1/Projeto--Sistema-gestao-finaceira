@@ -82,7 +82,7 @@ class Inicio extends CI_Controller {
 
 				if (password_verify($senha, $row['senha']) & $row['email'] == $email){
 
-					$id = $row['id_usuario'];
+					$id = $row['id'];
 
 
     //variavel de sessao

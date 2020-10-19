@@ -128,10 +128,6 @@ class Cadastro extends CI_Controller {
 				$this->erro_cadastro($info);
 				$of=false;
 
-			}elseif ($of & password_verify($senha, $row['senha'])) {
-				$info = " Senha fraca insira uma senha melhor!";
-				$this->erro_cadastro($info);
-				$of=false;
 			}
 		}
 
