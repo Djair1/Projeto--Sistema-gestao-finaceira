@@ -55,4 +55,14 @@ class UsuarioModel extends CI_Model {
 	}
 
 
+
+	public function desativar_usuario($id)
+	{
+		$this->db->query(" INSERT INTO usuarios_desativados
+			SELECT * FROM usuarios WHERE id='$id' ");
+
+		$this->db->query("DELETE FROM usuarios WHERE id ='$id' ");
+	}   
+
+
 }

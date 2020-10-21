@@ -106,4 +106,22 @@ class Painel extends CI_Controller {
 
 	}
 
+
+	public function desativar_conta()
+	{
+
+
+		$id = $this->session->userdata("id");
+		$this->load->model('UsuarioModel');
+
+
+
+		
+		$this->UsuarioModel->desativar_usuario($id);
+        $this->sair();
+
+	}
+
+
+
 }

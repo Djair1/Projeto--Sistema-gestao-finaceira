@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          </button>
          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#" class="card-link" data-toggle="modal" data-target="#sitemodal"> Alterar senha</a>
-          <a class="dropdown-item" href="#">Desativar conta</a>
+          <a class="dropdown-item" href="<?php echo site_url('Painel/desativar_conta'); ?>">Desativar conta</a>
           <a class="dropdown-item" href="<?php echo site_url('Painel/sair'); ?>">Sair</a>
         </div>
       </div>
@@ -151,15 +151,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <form action="<?php echo site_url('Painel/alterarSenha'); ?>  " method="post">
             <div class="form-group">
               <label for="exampleInputPassword1">Senha Atual</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="senhaA">
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Atual" name="senhaA">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword2">Nova senha</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="senhaB">
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nova" name="senhaB">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword2">Confirmar senha</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="senhaC">
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirmação" name="senhaC">
             </div>
 
             <button type="submit"  class="btn btn-primary">Salvar</button>

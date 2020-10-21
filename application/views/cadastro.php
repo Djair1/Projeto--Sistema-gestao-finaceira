@@ -92,6 +92,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   //history.forward();
 
+  //$('form').attr('onsubmit','return false;');window.location.href='<?php //echo site_url('Cadastro'); ?>'
+
   function aviso() {
     $('.alert-warning').alert('close');
   }
