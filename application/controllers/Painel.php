@@ -113,15 +113,53 @@ class Painel extends CI_Controller {
 
 		$id = $this->session->userdata("id");
 		$this->load->model('UsuarioModel');
-
-
-
-		
 		$this->UsuarioModel->desativar_usuario($id);
-        $this->sair();
+		$this->sair();
 
 	}
 
 
+public function mn()
+{
+	$valor = $this->input->post("valor");
+
+   
+	echo $valor;
+	
+	echo "........";
+
+
+$n = str_replace(',','.',str_replace('.','',$valor));
+
+echo $n;
+
+echo "........";
+
+$numero= $n+1500.50;
+
+echo "resultado:".$numero; 
+
+echo "........";
+
+
+$final = number_format($numero, 2, ',', '.');
+echo $final;
+
+
+
+
+  //   $n = str_replace('.00', '', number_format($valor, 2, '.', ''));
+  //   echo $n;
+	
+  //  echo "........";
+    
+  //  $vl = (String) $n;
+   // var_dump( $vl );
+
+     
+
+    
+
+}
 
 }

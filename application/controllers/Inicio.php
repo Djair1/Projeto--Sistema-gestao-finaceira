@@ -58,7 +58,7 @@ class Inicio extends CI_Controller {
 		if ($tamanhoDoEmail==0) {
 
 
-            redirect('Inicio');
+			redirect('Inicio');
 			
 
 		}elseif ($tamanhoDaSenha==0) {
@@ -67,7 +67,7 @@ class Inicio extends CI_Controller {
 
 		}elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-             redirect('Inicio');
+			redirect('Inicio');
 
 
 		}else{
@@ -77,6 +77,11 @@ class Inicio extends CI_Controller {
 
    //retornar dados salvos atraves do model cadastromodel
 			$busca = $this->UsuarioModel->carregar_dados(); 
+
+
+			if ($busca->num_rows()==0) {
+				redirect('Inicio');
+			}
 
 			foreach  ( $busca -> result_array ()  as  $row ){
 
@@ -98,18 +103,20 @@ class Inicio extends CI_Controller {
 					if ($alerta) {
 						redirect('Inicio/erro_login');
 						$alerta=false;
+
 					}
 
 				}
+
 			} 
 		}
 
 	}
 
 
-public function erro_login(){
-	
-$user = $this->session->userdata("usuario");
+	public function erro_login(){
+
+		$user = $this->session->userdata("usuario");
 		
 		$usersize = strlen($user);
 
@@ -121,12 +128,12 @@ $user = $this->session->userdata("usuario");
 
 			$info ="Verificar E-mail /ou senha inseridos";
 
-            $dados = array('aviso' => $info,'susseso'=>"");
+			$dados = array('aviso' => $info,'susseso'=>"");
 			$this->load->view('inicio',$dados);
 		}
 
 
-}
+	}
 
 
 }

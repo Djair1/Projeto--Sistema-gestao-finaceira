@@ -13,10 +13,10 @@ background-size: cover;
 #d1{
 
 position: relative;
-margin-top: 10px;
+margin-top: 125px;
 width: 260px;
-height: 500px;
-border-radius: 10px;
+height: 580px;
+border-radius: 7px;
 
 background-color: #E6E6FA;
 
@@ -27,26 +27,30 @@ background-color: #E6E6FA;
 position: absolute;
 top: 0px;
 left: 300px;
-width: 770px;
-height: 150px;
-background-color: #DCDCDC;
-border-radius: 15px;
+width: 810px;
+height: 100px;
+background-color: #696969;
+border-radius: 7px;
 
 }
 
 h1{
 
-margin-top: 20px;
+margin-top: 15px;
 color: black;
+margin-left: 230px;
+margin-right: 230px;
 font-family: Arial;
+text-align: center;
+background-color: white;
+border-radius: 5px;
 
 }
 
 h6{
-
-margin-top:35px; 
-color: black;
-font-family: Times New Roman;
+color: white;
+margin-top:10px; 
+font-family: Britannic;
 
 
 }
@@ -57,19 +61,20 @@ font-family: Times New Roman;
 #d3{
 
 position: absolute;
-top: 160px;
-left: 305px;
-width: 380px;
-height: 350px;
-background-color: #FFEBCD;
+top: 105px;
+left: 327px;
+width: 720px;
+height: 80px;
+border-radius: 7px;
+background-color:#F8F8FF;
 
 }
 
 #d4{
 
 position: absolute;
-top: 160px;
-left: 690px;
+top: 210px;
+left: 330px;
 width: 380px;
 height: 350px;
 background-color: #F8F8FF;
@@ -111,6 +116,7 @@ p2{
 
 color: black;
 font-family: Times New Roman;
+font-size: 16px;
 margin-left: 5px;
 margin-right:5px;
 
@@ -148,3 +154,43 @@ margin-right: 45px;
 
 
 }
+
+#receita{
+
+
+margin-left: 40px;
+margin-top: 15px;
+
+
+}
+
+#despesa{
+
+
+margin-left: 250px;
+margin-top: 15px;
+
+}
+
+#mdreceita {
+ 
+background-color:#F5F5F5;
+
+}
+
+#mddespesa{
+
+background-color:#F5F5F5;
+
+}
+
+#btreceita,#btdespesa{
+
+height:35px ;
+width: 465px;
+font-size: 16px;
+
+}
+
+
+
