@@ -2,15 +2,16 @@ CREATE TABLE usuarios(
 id int(4) AUTO_INCREMENT,
 email varchar(50) NOT NULL,
 telefone varchar(50),
+situacao varchar(25),
 senha varchar(255),
 PRIMARY KEY (id)
 );
 
-
-CREATE TABLE usuarios_desativados(
-id int(4) AUTO_INCREMENT,
+CREATE TABLE financas(
 email varchar(50) NOT NULL,
-telefone varchar(50),
-senha varchar(255),
-PRIMARY KEY (id)
+receita float(25),
+despesa float(25),
+saldo float(25),
+data varchar(10),
+PRIMARY KEY (email)
 );

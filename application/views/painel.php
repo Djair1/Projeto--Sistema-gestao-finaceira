@@ -34,8 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
        Configurações
      </button>
      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#" class="card-link" data-toggle="modal" data-target="#sitemodal"> Alterar senha</a>
-      <a class="dropdown-item" href="<?php echo site_url('Painel/desativar_conta'); ?>">Desativar conta</a>
+      <a class="dropdown-item" href="" class="card-link" data-toggle="modal" data-target="#sitemodal"> Alterar senha</a>
+      <a class="dropdown-item" href="" class="card-link" data-toggle='modal' data-target='#mddesativar_conta'>Desativar conta</a>
       <a class="dropdown-item" href="<?php echo site_url('Painel/sair'); ?>">Sair</a>
     </div>
   </div>
@@ -43,15 +43,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="alert alert-danger" style="z-index: 1; position: absolute; width: 1060px">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Warning!</strong><?php if ($aviso!="") {echo " ".$aviso; }else{
+  <strong>Warning!</strong><?php if ($this->session->userdata("avisoSenha")!="") {echo " ".$this->session->userdata("avisoSenha");}else{
     echo"<script> $('.alert-danger').alert('close');</script> ";
   }?>
 </div>
 
 </div>
-
-
-
 
 
 <div class="container-xl">
@@ -61,6 +58,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <br><br>
     <p1>USUÁRIO:</p1>
     <p2><center><?php echo  $email ; ?></center></p2>
+
+      <h5><center>RENDA FIXA ATUAL</center></h5>
+      <h4><center><?php if ($this->session->userdata("valorReceitaFixaAtual")!=""){echo "R$" .$this->session->userdata("valorReceitaFixaAtual");}else{echo "R$ 0.00";}?></center></h4>
+      <br>
+
+      <h5><center>DESPESA FIXA ATUAL</center></h5>
+      <h4><center><?php if ($this->session->userdata("valorDespesaFixaAtual")!=""){echo "R$" .$this->session->userdata("valorDespesaFixaAtual");}else{echo "R$ 0.00";}?></center></h4>
 
     <!--<button id="bt1" type="button" class="btn btn-dark">Lembretes</button>-->
 
@@ -105,7 +109,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="d2">
 
       <h6><center>SALDO ATUAL</center></h6>
-      <h1><center> R$ 150.00</center></h1>
+      <h1><center>R$</center></h1>
 
 
     </div>
@@ -215,7 +219,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
       <div class="modal-body">
 
-        <form action="<?php echo site_url('Painel/mn'); ?>  " method="post">
+        <form action="<?php echo site_url('GerirFinancas/adicionarReceita'); ?>  " method="post">
           <div class="form-group">
             <label for="exampleInput">Valor:</label>
             <br>
@@ -251,11 +255,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
       <div class="modal-body">
 
-        <form action="<?php echo site_url('Painel'); ?>  " method="post">
+        <form action="<?php echo site_url('GerirFinancas/adicionarDespesa'); ?>  " method="post">
           <div class="form-group">
             <label for="exampleInput">Valor:</label>
             <br>
-            <input type="text" class="form-control" onkeypress="$(this).mask('R$ 999.990,00')">
+            <input type="text" placeholder="RS$" class="form-control" name="valor" maxlength="10" onkeypress="$(this).mask('#.##0,00', {reverse: true})">
           </div>
           <button id="btdespesa" type="submit"  class="btn btn-primary">Salvar</button>
 
@@ -270,7 +274,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <!-- fim Modal -->
 
+<!--modal Desativar conta-->
 
+<div class="modal" id="mddesativar_conta" tabindex="-1" role="dialog" style="padding-top: 150px">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <!----------------------------------------------------------->
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DESATIVAR CONTA!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="<?php echo site_url('Painel/desativar_conta'); ?>  " method="post">
+          <div class="form-group">
+            <label for="exampleInput">Sua conta será desativada permanentemente !</label>
+            <br>
+          </div>
+          <button id="btdesativar" type="submit"  class="btn btn-primary">DESATIVAR</button>
+
+        </form>
+
+      </div>
+      
+    </div>  
+  </div>
+</div>
+
+
+<!-- fim Modal -->
 
 
 <script type="text/javascript">
@@ -290,9 +325,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $('#mddespesa').modal('show');
 
   }
-
-
-
+  
 </script>
 
 

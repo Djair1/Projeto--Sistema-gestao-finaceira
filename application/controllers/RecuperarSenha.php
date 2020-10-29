@@ -18,22 +18,15 @@ class RecuperarSenha extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index($aviso="")
+	public function index()
 	{
 
-		$dados = array('alerta'=>"");
-
-		$this->load->view('recuperarSenha',$dados);
+		$this->load->view('recuperarSenha');
+		$this->session->set_userdata("alerta", "");
 
 	}
 
-	public function alertaEmail(){
-		$dados = array('alerta'=>"Endereco de E-mail não Encontrado !");
-
-		$this->load->view('recuperarSenha',$dados);
-	}
-
-
+	
 	public function buscarUsuario(){
 
 
@@ -52,6 +45,12 @@ class RecuperarSenha extends CI_Controller {
    //retornar dados salvos atraves do model cadastromodel
 		$busca = $this->UsuarioModel->carregar_dados(); 
 
+if ($busca->num_rows()==0) {
+	$this->session->set_userdata("alerta", " Endereço de E-mail não encontrado !");
+				redirect('RecuperarSenha');
+				exit();
+			}
+
 		foreach  ( $busca -> result_array ()  as  $row ) 
 		{ 
 
@@ -59,7 +58,6 @@ class RecuperarSenha extends CI_Controller {
 
 				$this->enviar_email( $email);
 				$emailinvalido=false;
-				$email="";	
 
 			}
 
@@ -68,10 +66,10 @@ class RecuperarSenha extends CI_Controller {
 		}
 		if ( $emailinvalido==true & $row['email']!=$email) {
 			
-			$texto= "E-mail não cadastrado !";
-			$this->index($texto);	
-			redirect('RecuperarSenha/alertaEmail');
 			
+			$this->session->set_userdata("alerta", " Endereço de E-mail não encontrado. !");
+			redirect('RecuperarSenha');
+			exit();
 		}
 
 

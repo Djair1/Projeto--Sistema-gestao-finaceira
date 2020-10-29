@@ -27,11 +27,14 @@ class Cadastro extends CI_Controller {
 		if ($usersize > 0) {
 
 			redirect('Painel');
+			exit();
 
 		}else{
 
-			$dados = array('aviso' => "");
-			$this->load->view('cadastro',$dados);
+			//$dados = array('aviso' => "");
+			//$this->load->view('cadastro',$dados);
+			$this->load->view('cadastro');
+			$this->session->set_userdata("errocadastro", "");
 
 		}
 
@@ -55,54 +58,58 @@ class Cadastro extends CI_Controller {
 
 		if ($tamanhoDoEmail==0) {
 
-			$info = "Definir endereço de Email !";
-            $this->erro_cadastro($info);
+			
+			$this->session->set_userdata("errocadastro", "Definir endereço de Email !");
+			redirect('Cadastro');
+			exit();
 
 		}elseif ($tamanhoTelefone==0) {
 
 
-			$info = "Inserir um numero de telefone !";
-
-			$this->erro_cadastro($info);
+			$this->session->set_userdata("errocadastro", "Inserir um numero de telefone !");
+			redirect('Cadastro');
+			exit();
 
 
 		}elseif ( $tamanhoTelefone < 15 ) {
 
-			$info = "numero de telefone inválido !";
+			$this->session->set_userdata("errocadastro", "numero de telefone inválido !");
+			redirect('Cadastro');
+			exit();
 
-			$this->erro_cadastro($info);
 
 		}elseif ($tamanhoSenha==0) {
 
 
-			$info = "Defina sua Senha !";
-
-			$this->erro_cadastro($info);
+			$this->session->set_userdata("errocadastro", "Defina sua Senha !");
+			redirect('Cadastro');
+			exit();
+			
 
 
 		}elseif ($tamanhoSenhaConfirmada==0) {
 
-			$info = "Confirme sua Senha !";
-
-			$this->erro_cadastro($info);
+			$this->session->set_userdata("errocadastro", "Confirme sua Senha !");
+			redirect('Cadastro');
+			exit();
 
 		}elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-			$info = "verificar o endereço de email inserido";
-
-			$this->erro_cadastro($info);
+			$this->session->set_userdata("errocadastro", "verificar o endereço de email inserido");
+			redirect('Cadastro');
+			exit();
 
 		}elseif ($tamanhoSenha<8 | $tamanhoSenha>32) {
 
-			$info = "Sua senha deve conter no mínimo 8 caracteres (até 32)";
-
-			$this->erro_cadastro($info);
+			$this->session->set_userdata("errocadastro", "Sua senha deve conter no mínimo 8 caracteres (até 32)");
+			redirect('Cadastro');
+			exit();
 
 		}elseif ($senha != $senhaConfirmada) {
 
-			$info = "as senhas digitadas não correspondem !";
-
-			$this->erro_cadastro($info);
+			$this->session->set_userdata("errocadastro", "as senhas digitadas não correspondem !");
+			redirect('Cadastro');
+			exit();
 
 		}else{
 
@@ -115,69 +122,48 @@ class Cadastro extends CI_Controller {
 
 	public function cadastrar_usuario($email,$senha,$telefone){
 
-		$of = true;
+		
 		$this->load->model('UsuarioModel');
 		$busca = $this->UsuarioModel->carregar_dados(); 
 
 		foreach  ( $busca -> result_array ()  as  $row ) {
 
-			if ($of & $row['email']== $email) {
+			if ($row['email']== $email) {
 
-
-				$info = " endereco de email já cadastrado !";
-				$this->erro_cadastro($info);
-				$of=false;
+				$this->session->set_userdata("errocadastro", " endereco de email já cadastrado !");
+				redirect('Cadastro');
+				exit();
 
 			}
 		}
-
-		if ($of) {
-
-			try {
+		try {
 
 //criptografar a senha do usuario
-				$senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT); 
+			$senhaCriptografada = password_hash($senha, PASSWORD_BCRYPT); 
 
 //mandando dados pro Usuariomodel
-				$this->load->model('UsuarioModel');
-				$this->UsuarioModel->gravar_dados($email,$telefone,$senhaCriptografada);
+			$this->load->model('UsuarioModel');
+			$this->UsuarioModel->gravar_dados($email,$telefone,$senhaCriptografada);
 
-				$dados = array('aviso' => "",'susseso'=>"Cadastro Realizado com susseso !");
-				$this->load->view('inicio',$dados);
+			//$dados = array('aviso' => "",'susseso'=>"Cadastro Realizado com susseso !");
+			//$this->load->view('inicio',$dados);
+			$this->session->set_userdata("cadastroOK","Cadastro Realizado com susseso !");
+			redirect('Inicio');
+			exit();
 
-			} catch (Exception $e) {
-
-				$info = "Erro ao realizar o Cadastro ";
-				$this->erro_cadastro($info);
-
-			}
+		} catch (Exception $e) {
 
 
+			$this->session->set_userdata("errocadastro", "Erro ao realizar o Cadastro !");
+			redirect('Cadastro');
+			exit();
+			
 
 		}
+
 
 
 	}
-
-public function erro_cadastro($erro){
-	
-$user = $this->session->userdata("usuario");
-
-		$usersize = strlen($user);
-
-		if ($usersize > 0) {
-
-			redirect('Painel');
-
-		}else{
-
-			$dados = array('aviso' => $erro);
-			$this->load->view('cadastro',$dados);
-
-		}
-
-
-}
 
 
 }

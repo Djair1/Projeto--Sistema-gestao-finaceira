@@ -43,10 +43,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div id="container-xl" class="alert alert-danger alert-dismissible" style="z-index: 1; position: absolute; width: 100%">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Warning! </strong><?php if ($alerta!="") {echo"__".$alerta; }else{
+  <strong>Warning! </strong><?php if ($this->session->userdata("alerta")!="") {echo"__".$this->session->userdata("alerta"); }else{
     echo"<script> $('.alert-danger').alert('close');</script> ";
   }?>
 </div>
+
+
+
 <div id="container-xl">
   <form id="formulario"  class="form-signin" action="<?php echo site_url('recuperarSenha/buscarUsuario');?>" method="post">
 

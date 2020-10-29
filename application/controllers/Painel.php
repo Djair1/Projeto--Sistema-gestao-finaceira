@@ -22,24 +22,26 @@ class Painel extends CI_Controller {
 
 
 	
-	public function index($aviso=""){
+	public function index(){
 
 		$id = $this->session->userdata("id");
 
 		$email = $this->session->userdata("usuario");
 
-
 		if (strlen($email)!=0) {
 			
-			$dados = array('email' => $email,'aviso' => $aviso);
-
+			$dados = array('email' => $email);
+			$this->buscar_financas_Usuario();
 			$this->load->view('painel',$dados);
+			$this->session->set_userdata("avisoSenha","");
+
 
 
 		}else{
 
 
 			redirect('Inicio');
+			exit();
 
 
 		}
@@ -52,7 +54,10 @@ class Painel extends CI_Controller {
 
 		$this->session->set_userdata("id", "");
 		$this->session->set_userdata("usuario", "");
+		$this->session->set_userdata("valorReceitaFixaAtual","");
+		$this->session->set_userdata("valorDespesaFixaAtual","");
 		redirect('Inicio');
+		exit();
 		
 
 	}
@@ -66,7 +71,7 @@ class Painel extends CI_Controller {
 		$email = $this->session->userdata("usuario");
 		$id = $this->session->userdata("id");
 		$this->load->model('UsuarioModel');
-		$ouvinte=true;
+
 		
 
 
@@ -74,41 +79,37 @@ class Painel extends CI_Controller {
 
 		foreach  ( $busca -> result_array ()  as  $row ){
 
-			if ($senhaA == $senhaB) {
+			if ($senhaB == $senhaC) {
 
 				if (password_verify($senhaA, $row['senha']) & $row['email'] == $email){
 
 					$senhaCRT = password_hash($senhaC, PASSWORD_BCRYPT);
 					$this->UsuarioModel->alterar_senha($senhaCRT,$id);
 					redirect('Painel');
-					$ouvinte=false;
+					exit();
+				
 
 
 				} 
 			}
 		}
 
-		if($senhaA != $senhaB){
-			$info="a nova senha nao correspode na confirmação";
-			$this->index($info);
-			$ouvinte=false;
-		}
+		if($senhaB != $senhaC){
 
+			$this->session->set_userdata("avisoSenha", "a nova senha nao correspode na confirmação");
+			redirect('Painel');
+			exit();
 
-
-
-		if ($ouvinte) {
-
-			$info="Erro ao atualizar senha";
-			$this->index($info);
-
+		}else{
+			$this->session->set_userdata("avisoSenha", "Erro ao atualizar senha");
+			redirect('Painel');
+			exit();
 		}
 
 	}
 
 
-	public function desativar_conta()
-	{
+	public function desativar_conta(){
 
 
 		$id = $this->session->userdata("id");
@@ -119,47 +120,55 @@ class Painel extends CI_Controller {
 	}
 
 
-public function mn()
+	private function buscar_financas_Usuario(){
+		
+		$this->load->model('FinancasModel');
+		$dados = $this->FinancasModel->carregar_financas();
+
+		foreach ($dados -> result_array() as $row) {
+
+			if ($this->session->userdata("usuario") == $row['email']) {
+
+				$valorReceita= $row['receita'];
+				$valorDespesa= $row['despesa'];
+
+
+				$valorFormatadoReceita = number_format($valorReceita, 2, ',', '.');
+				$valorFormatadoDespesa = number_format($valorDespesa, 2, ',', '.');
+
+				$this->session->set_userdata("valorReceitaFixaAtual",$valorFormatadoReceita);
+				$this->session->set_userdata("valorDespesaFixaAtual",$valorFormatadoDespesa);
+
+				
+				
+
+
+
+			}
+
+
+
+		}
+
+
+
+
+	}
+
+
+public function data()
 {
-	$valor = $this->input->post("valor");
 
-   
-	echo $valor;
-	
-	echo "........";
-
-
-$n = str_replace(',','.',str_replace('.','',$valor));
-
-echo $n;
-
-echo "........";
-
-$numero= $n+1500.50;
-
-echo "resultado:".$numero; 
-
-echo "........";
-
-
-$final = number_format($numero, 2, ',', '.');
-echo $final;
-
-
-
-
-  //   $n = str_replace('.00', '', number_format($valor, 2, '.', ''));
-  //   echo $n;
-	
-  //  echo "........";
-    
-  //  $vl = (String) $n;
-   // var_dump( $vl );
-
-     
-
-    
+$one= new DateTime('2012-06-01');
+$two = new DateTime('2012-07-10');
+ 
+// Resgata diferença entre as datas
+$dateInterval = $one->diff($two);
+echo $dateInterval->days;
+echo '........';
+echo date("d/m/Y");
 
 }
+
 
 }

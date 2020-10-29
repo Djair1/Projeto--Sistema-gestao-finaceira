@@ -43,14 +43,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <div class="alert alert-warning" style="z-index: 1; position: absolute; width: 100%">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Atencão!</strong><?php if ($aviso!="") {echo " ".$aviso; }else{
+  <strong>Atencão!</strong><?php if ($this->session->userdata("errocadastro")!="") {echo " ".$this->session->userdata("errocadastro"); }else{
     echo"<script> $('.alert-warning').alert('close');</script> ";
 
   }?>
 </div>
 
 
-<div onclick="aviso();" class="container-xl">
+<div class="container-xl">
 
   <form id="formulario" class="form-control" action="<?php echo site_url('cadastro/Realizar_cadastro'); ?>  " method="post">
     <a href="<?php echo site_url('inicio'); ?>">

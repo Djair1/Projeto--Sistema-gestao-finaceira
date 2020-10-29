@@ -43,20 +43,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <div class="alert alert-warning" style="z-index: 1; position: absolute; width: 100%">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Warning!</strong><?php if ($aviso!="") {echo " ".$aviso; }else{
+  <strong>Warning!</strong><?php if ($this->session->userdata("errologin")!="") {echo " ".$this->session->userdata("errologin"); }else{
     echo"<script> $('.alert-warning').alert('close');</script> ";
   }?>
 </div>
 <div class="alert alert-success" style="z-index: 1; position: absolute; width: 100%">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Success!</strong><?php if ($susseso!="") {echo " ".$susseso; }else{
+  <strong>Success!</strong><?php if ($this->session->userdata("cadastroOK")!="") {echo " ".$this->session->userdata("cadastroOK");}else{
     echo"<script> $('.alert-success').alert('close');</script> ";
   }?>
 </div>
 
-
-
-<div onclick="aviso();" class="container-xl">
+<div class="container-xl">
 
   <form id="formulario"  class="form-signin" action="<?php echo site_url('inicio/login'); ?>  " method="post">
 
