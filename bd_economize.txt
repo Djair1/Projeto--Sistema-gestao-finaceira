@@ -9,9 +9,27 @@ PRIMARY KEY (id)
 
 CREATE TABLE financas(
 email varchar(50) NOT NULL,
-receita float(25),
-despesa float(25),
+renda_fixa float(25),
+renda_variavel float(25),
+despesa_fixa float(25),
+despesa_variavel float(25),
 saldo float(25),
 data varchar(10),
 PRIMARY KEY (email)
+);
+
+
+/////////////tabela de financas final///////////////
+
+
+CREATE TABLE financas(
+id int(5) AUTO_INCREMENT,
+email varchar(50) NOT NULL,
+renda_fixa_mensal float(25),
+renda_variavel_mensal float(25),
+despesa_fixa_mensal float(25),
+despesa_variavel_mensal float(25),
+saldo float(25),
+data varchar(10),
+PRIMARY KEY (id)
 );

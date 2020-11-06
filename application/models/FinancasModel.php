@@ -4,11 +4,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class FinancasModel extends CI_Model {
 
 
-	public function gravar_receita_usuario($email , $receita, $despesa){
 
-		$dados = [$email , $receita, $despesa,$receita,date("d/m/Y")];
 
-		$this->db->query('INSERT INTO financas(email,receita,despesa,saldo,data) VALUES (?,?,?,?,?)',$dados);
+
+
+	public function gravar_financas_usuario($email,$rfm,$rvm,$dfm,$dvm,$saldo)
+	{
+
+
+		$dados = [$email ,$rfm,$rvm,$dfm,$dvm,$saldo,date("d/m/Y")];
+
+
+		$this->db->query('INSERT INTO financas(email,renda_fixa_mensal,renda_variavel_mensal,despesa_fixa_mensal,despesa_variavel_mensal,saldo,data) VALUES (?,?,?,?,?,?,?)',$dados);
 
 
 		

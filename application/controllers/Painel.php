@@ -56,6 +56,7 @@ class Painel extends CI_Controller {
 		$this->session->set_userdata("usuario", "");
 		$this->session->set_userdata("valorReceitaFixaAtual","");
 		$this->session->set_userdata("valorDespesaFixaAtual","");
+		$this->session->set_userdata("valorsaldo","");
 		redirect('Inicio');
 		exit();
 		
@@ -129,15 +130,18 @@ class Painel extends CI_Controller {
 
 			if ($this->session->userdata("usuario") == $row['email']) {
 
-				$valorReceita= $row['receita'];
-				$valorDespesa= $row['despesa'];
+				$valorReceita= $row['renda_fixa_mensal'];
+				$valorDespesa= $row['despesa_fixa_mensal'];
+				$saldo= $row['saldo'];
 
 
 				$valorFormatadoReceita = number_format($valorReceita, 2, ',', '.');
 				$valorFormatadoDespesa = number_format($valorDespesa, 2, ',', '.');
+				$valorFormatadoSaldo = number_format($saldo, 2, ',', '.');
 
 				$this->session->set_userdata("valorReceitaFixaAtual",$valorFormatadoReceita);
 				$this->session->set_userdata("valorDespesaFixaAtual",$valorFormatadoDespesa);
+				$this->session->set_userdata("valorsaldo",$valorFormatadoSaldo);
 
 				
 				
