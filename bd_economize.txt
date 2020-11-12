@@ -7,17 +7,6 @@ senha varchar(255),
 PRIMARY KEY (id)
 );
 
-CREATE TABLE financas(
-email varchar(50) NOT NULL,
-renda_fixa float(25),
-renda_variavel float(25),
-despesa_fixa float(25),
-despesa_variavel float(25),
-saldo float(25),
-data varchar(10),
-PRIMARY KEY (email)
-);
-
 
 /////////////tabela de financas final///////////////
 
@@ -25,10 +14,34 @@ PRIMARY KEY (email)
 CREATE TABLE financas(
 id int(5) AUTO_INCREMENT,
 email varchar(50) NOT NULL,
+
+descricao_renda_fixa_mensal varchar(50),
 renda_fixa_mensal float(25),
-renda_variavel_mensal float(25),
+descricao_despesa_fixa_mensal varchar(50),
 despesa_fixa_mensal float(25),
+
+descricao_renda_variavel_mensal_1 varchar(50),
+renda_variavel_mensal float(25),
+descricao_renda_variavel_mensal_2 varchar(50),
+renda_variavel_mensal_2 float(25),
+descricao_renda_variavel_mensal_3 varchar(50),
+renda_variavel_mensal_3 float(25),
+descricao_renda_variavel_mensal_4 varchar(50),
+renda_variavel_mensal_4 float(25),
+descricao_renda_variavel_mensal_5 varchar(50),
+renda_variavel_mensal_5 float(25),
+
+descricao_despesa_variavel_mensal_1 varchar(50),
 despesa_variavel_mensal float(25),
+descricao_despesa_variavel_mensal_2 varchar(50),
+despesa_variavel_mensal_2 float(25),
+descricao_despesa_variavel_mensal_3 varchar(50),
+despesa_variavel_mensal_3 float(25),
+descricao_despesa_variavel_mensal_4 varchar(50),
+despesa_variavel_mensal_4 float(25),
+descricao_despesa_variavel_mensal_5 varchar(50),
+despesa_variavel_mensal_5 float(25),
+
 saldo float(25),
 data varchar(10),
 PRIMARY KEY (id)

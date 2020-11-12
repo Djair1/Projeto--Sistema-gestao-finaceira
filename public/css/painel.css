@@ -13,12 +13,13 @@ body{
 
 #d1{
 
-	position: relative;
-	margin-top: 90px;
+	position: absolute;
+    top :80px;
+    left: 50px;
 	width: 260px;
-	height: 580px;
+	height: 800px;
 	border-radius: 7px;
-    background-color: #F8F8FF;
+    background-color: #DCDCDC;
 
 
 }
@@ -64,6 +65,7 @@ h6{
 #d3{
 
 	position: absolute;
+	z-index: 2;
 	top: 105px;
 	left: 315px;
 	width: 720px;
@@ -76,11 +78,24 @@ h6{
 #d4{
 
 	position: absolute;
-	top: 210px;
-	left: 330px;
-	width: 380px;
-	height: 350px;
-	background-color: #F8F8FF;
+	top: 190px;
+	left: 270px;
+	width: 810px;
+	height: 390px;
+	
+	
+}
+
+
+#chart_div{
+position: absolute;
+z-index: 1;
+top:280px;
+left:670px;
+width:700px ;
+height:400px ;
+
+
 }
 
 
@@ -89,10 +104,9 @@ h6{
 #titulo{
 
 	font-family: Showcard Gothic;
-	margin-left: 420px;
 	font-size: 25px;
-	padding-left:5px ;
-	padding-right: 5px;
+	margin-left: 44%;
+	
 
 
 }
@@ -109,6 +123,8 @@ img{
 p1{
 
 	color: black;
+	font-family: calibri ;
+	font-size: 18px ;
 	margin-left: 90px;
 	margin-right: 5px;
 
@@ -117,9 +133,9 @@ p1{
 
 p2{
 
-	color: black;
-	font-family: Times New Roman;
-	font-size: 18px;
+	color:black;
+	font-family: arial;
+	font-size: 16px;
 	margin-left: 5px;
 	margin-right:5px;
 
@@ -131,12 +147,21 @@ p2{
 	height: 50px;
 	width: 260px;
 	color: white;
-	margin-top: 90px;
+	margin-top: 70px;
 
 
 }
 
 #bt2{
+
+	height: 50px;
+	width: 260px;
+	color: white;
+	margin-top: 5px;
+
+}
+
+#bt3{
 
 	height: 50px;
 	width: 260px;
@@ -184,36 +209,55 @@ nav{
 
 #sitemodal{
 
-	background-color:#F5F5F5;
-	padding-top: 45px; 
+	background:rgba(0,0,0,0.6);
+	padding-top: 25px; 
 	
 }
 
 
 #mdreceita {
 
-	background-color:#F5F5F5;
+
+    background:rgba(0,0,0,0.6);
 
 }
 
 #mddespesa{
 
-	background-color:#F5F5F5;
+	background:rgba(0,0,0,0.6);
 
 }
 
 #mddesativar_conta{
 
-	background-color:#F5F5F5;
+	background:rgba(0,0,0,0.6);
 
 }
 
+#h_renda{
+
+   background:rgba(0,0,0,0.6);
+
+}
+
+#h_despesa{
+
+   background:rgba(0,0,0,0.6);
+
+}
+
+
+.modal-backdrop{
+    display: none;
+    }
+
+
 #btdesativar{
 
-	height:40px ;
-	width: 465px;
-	margin-top: 10px;
+	width:470px ;height:35px ;
+	margin-top: 5px;
 	font-size: 17px;
+	border-radius: 16px ; 
 	background-color: red;
 	border-color: red;
 	color: white;
@@ -256,6 +300,39 @@ color: black;
 
 #exampleModalLabel{
 
-margin-left: 34%;
+margin-left: 36%;
 
 }
+#exampleModalLabel_1{
+
+margin-left: 29%;
+
+}
+
+#exampleModal_Label_cadastro_renda{
+
+margin-left: 28%;
+font-size: 27px;
+
+
+}
+
+th{
+
+font-size: 14px;
+
+
+}
+
+
+
+td{
+
+
+font-size: 12px;
+padding-left:5px ;
+padding-right:5px;
+
+}
+
+   

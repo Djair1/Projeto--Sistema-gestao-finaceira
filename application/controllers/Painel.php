@@ -29,13 +29,10 @@ class Painel extends CI_Controller {
 		$email = $this->session->userdata("usuario");
 
 		if (strlen($email)!=0) {
-			
-			$dados = array('email' => $email);
+
+		   
 			$this->buscar_financas_Usuario();
-			$this->load->view('painel',$dados);
-			$this->session->set_userdata("avisoSenha","");
-
-
+		
 
 		}else{
 
@@ -88,7 +85,7 @@ class Painel extends CI_Controller {
 					$this->UsuarioModel->alterar_senha($senhaCRT,$id);
 					redirect('Painel');
 					exit();
-				
+
 
 
 				} 
@@ -124,9 +121,9 @@ class Painel extends CI_Controller {
 	private function buscar_financas_Usuario(){
 		
 		$this->load->model('FinancasModel');
-		$dados = $this->FinancasModel->carregar_financas();
+		$get_dados = $this->FinancasModel->carregar_financas();
 
-		foreach ($dados -> result_array() as $row) {
+		foreach ($get_dados -> result_array() as $row) {
 
 			if ($this->session->userdata("usuario") == $row['email']) {
 
@@ -144,35 +141,46 @@ class Painel extends CI_Controller {
 				$this->session->set_userdata("valorsaldo",$valorFormatadoSaldo);
 
 				
-				
-
-
 
 			}
 
+		}
 
+		$usuario_dados = array();
+		$usuario_banco = array();
+
+		foreach ($get_dados -> result_array() as $row) {
+
+			if ($this->session->userdata("usuario") == $row['email']){
+
+				array_push($usuario_banco,$row);
+
+			}
 
 		}
 
+       $usuario_dados = array_reverse($usuario_banco);
 
-
-
+		$dados = array('email' => $this->session->userdata("usuario") ,'valores_financas'=> $usuario_dados);
+		$this->load->view('painel',$dados);
+        $this->session->set_userdata("avisoSenha","");
 	}
 
 
-public function data()
-{
 
-$one= new DateTime('2012-06-01');
-$two = new DateTime('2012-07-10');
- 
+	public function data()
+	{
+
+		$one= new DateTime('2012-06-01');
+		$two = new DateTime('2012-07-10');
+
 // Resgata diferença entre as datas
-$dateInterval = $one->diff($two);
-echo $dateInterval->days;
-echo '........';
-echo date("d/m/Y");
+		$dateInterval = $one->diff($two);
+		echo $dateInterval->days;
+		echo '........';
+		echo date("d/m/Y");
 
-}
+	}
 
 
 }

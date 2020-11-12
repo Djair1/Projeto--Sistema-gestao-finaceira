@@ -52,10 +52,15 @@ class Inicio extends CI_Controller {
 
 
 	public function login(){
-		//receber dados dentro de um array
+	  //receber dados dentro de um array
 	 // $dados['informacoes'] = $this->input->post();
 		$email = $this->input->post('text_email');
 		$senha = $this->input->post('text_senha');
+
+		
+		$this->load->model('UsuarioModel');
+   //retornar dados salvos atraves do model cadastromodel
+	    $busca = $this->UsuarioModel->carregar_dados(); 
 
 		$tamanhoDoEmail = strlen($email);
 		$tamanhoDaSenha = strlen($senha);
@@ -81,13 +86,7 @@ class Inicio extends CI_Controller {
 
 		}else{
 
-			$alerta = true;
-			$this->load->model('UsuarioModel');
-
-   //retornar dados salvos atraves do model cadastromodel
-			$busca = $this->UsuarioModel->carregar_dados(); 
-
-
+			
 			if ($busca->num_rows()==0) {
 				redirect('Inicio');
 				exit();
@@ -98,13 +97,10 @@ class Inicio extends CI_Controller {
 				if (password_verify($senha, $row['senha']) & $row['email'] == $email & $row['situacao']=="usuario_ativo"){
 
 					$id = $row['id'];
-
-
-    //variavel de sessao
+                    //variaveis de sessao
 					$this->session->set_userdata("usuario", $email);
 					$this->session->set_userdata("id", $id);
-					
-
+				
 					redirect('Painel');
 					exit();
 
@@ -118,8 +114,6 @@ class Inicio extends CI_Controller {
 			exit();
 
 		}
-
-
 
 	}
 

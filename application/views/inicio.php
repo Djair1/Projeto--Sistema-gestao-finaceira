@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <body background="<?php echo base_url('public/imagens/fundo_site.jpg');?>">
 
-  <?php unset($_POST['']); ?>
+  
 
   <div>
 
@@ -53,6 +53,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     echo"<script> $('.alert-success').alert('close');</script> ";
   }?>
 </div>
+<?php $teste =10; ?>
+
+<div class="alert alert-primary" role="alert" style="z-index: 1; position: absolute; width: 100%">
+  This is a primary alert with <a href="#" class="alert-link">an example link</a><?php if ($teste == 9) {echo "  . Give it a click if you like.";}else{
+    echo"<script> $('.alert-primary').alert('close');</script> ";
+  }?>
+</div>
+
+
+
 
 <div class="container-xl">
 
