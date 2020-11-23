@@ -1,0 +1,119 @@
+
+
+
+body{
+
+font-family: "Helvetica",	"Lucida	Grande",	sans-serif;
+color: black;
+height: 100%;
+background-position:top;
+background-repeat: no-repeat;
+background-size: cover;
+
+
+
+}
+
+
+#exampleInputEmail1,
+#exampleInputTelefone1,
+#exampleInputPassword1,
+#exampleInputPassword2{
+
+width: 390px;
+height: 40px;
+margin-left:2px;
+border-radius: 6px;
+font-size: 18px;
+font-family: "serif";
+
+}
+
+
+.container-xl{
+
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center
+
+}
+
+#entrar{
+
+margin-top:15px;
+margin-left:14px;
+height:35px;
+width: 375px;
+color: white;
+font-size: 16px;
+border: white;
+border-radius: 15px;
+background:#1C1C1C;
+
+}
+
+img{
+margin-top: 20px;
+margin-left: 53px;
+
+}
+
+#formulario{
+margin-top: 80px;
+border-radius:8px ;
+background-color: white ;
+height: 450px ;
+width: 420px ;
+
+}
+
+#in ,#ca{
+
+font-family: serif;
+font-style: italic;
+font-size: 16px;
+
+}
+
+#titulo{
+
+font-family: Showcard Gothic;
+font-size: 25px;
+padding-left: 10px;
+padding-right: 15px;
+
+}
+#alerta_user{
+
+z-index: 1; 
+top: 90px;
+position: absolute;
+width:390px;
+
+
+
+}
+
+
+#footer{
+
+
+width: 100%;
+height: 35px;
+z-index: 2;
+background-color:#DCDCDC;
+position: fixed;
+bottom: 0;
+
+
+}
+
+
+#barra{
+
+
+height: 65px;
+
+
+}

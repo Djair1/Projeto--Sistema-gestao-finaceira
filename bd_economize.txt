@@ -1,0 +1,88 @@
+CREATE TABLE usuarios(
+id int(4) AUTO_INCREMENT,
+email varchar(50) NOT NULL,
+telefone varchar(50),
+situacao varchar(25),
+senha varchar(255),
+PRIMARY KEY (id)
+);
+
+
+/////////////tabela de financas final///////////////
+
+
+CREATE TABLE financas(
+id int(5) AUTO_INCREMENT,
+email varchar(50) NOT NULL,
+
+descricao_renda_fixa_mensal varchar(50),
+renda_fixa_mensal float(25),
+descricao_despesa_fixa_mensal varchar(50),
+despesa_fixa_mensal float(25),
+
+descricao_renda_variavel_mensal_1 varchar(50),
+renda_variavel_mensal float(25),
+descricao_renda_variavel_mensal_2 varchar(50),
+renda_variavel_mensal_2 float(25),
+descricao_renda_variavel_mensal_3 varchar(50),
+renda_variavel_mensal_3 float(25),
+descricao_renda_variavel_mensal_4 varchar(50),
+renda_variavel_mensal_4 float(25),
+descricao_renda_variavel_mensal_5 varchar(50),
+renda_variavel_mensal_5 float(25),
+
+descricao_despesa_variavel_mensal_1 varchar(50),
+despesa_variavel_mensal float(25),
+descricao_despesa_variavel_mensal_2 varchar(50),
+despesa_variavel_mensal_2 float(25),
+descricao_despesa_variavel_mensal_3 varchar(50),
+despesa_variavel_mensal_3 float(25),
+descricao_despesa_variavel_mensal_4 varchar(50),
+despesa_variavel_mensal_4 float(25),
+descricao_despesa_variavel_mensal_5 varchar(50),
+despesa_variavel_mensal_5 float(25),
+
+saldo float(25),
+data varchar(10),
+PRIMARY KEY (id)
+);
+
+
+/////////////////tabela de financas criptografadas////////////////
+
+
+CREATE TABLE financas(
+id int(5) AUTO_INCREMENT,
+email varchar(50) NOT NULL,
+
+descricao_renda_fixa_mensal varchar(80),
+renda_fixa_mensal varchar(30),
+descricao_despesa_fixa_mensal varchar(80),
+despesa_fixa_mensal varchar(30),
+
+descricao_renda_variavel_mensal_1 varchar(80),
+renda_variavel_mensal varchar(30),
+descricao_renda_variavel_mensal_2 varchar(80),
+renda_variavel_mensal_2 varchar(30),
+descricao_renda_variavel_mensal_3 varchar(80),
+renda_variavel_mensal_3 varchar(30),
+descricao_renda_variavel_mensal_4 varchar(80),
+renda_variavel_mensal_4 varchar(30),
+descricao_renda_variavel_mensal_5 varchar(80),
+renda_variavel_mensal_5 varchar(30),
+
+descricao_despesa_variavel_mensal_1 varchar(80),
+despesa_variavel_mensal varchar(30),
+descricao_despesa_variavel_mensal_2 varchar(80),
+despesa_variavel_mensal_2 varchar(30),
+descricao_despesa_variavel_mensal_3 varchar(80),
+despesa_variavel_mensal_3 varchar(30),
+descricao_despesa_variavel_mensal_4 varchar(80),
+despesa_variavel_mensal_4 varchar(30),
+descricao_despesa_variavel_mensal_5 varchar(80),
+despesa_variavel_mensal_5 varchar(30),
+
+saldo varchar(30),
+data varchar(30),
+PRIMARY KEY (id)
+);

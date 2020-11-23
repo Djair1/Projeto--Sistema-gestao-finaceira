@@ -1,0 +1,126 @@
+body{
+
+font-family: "Helvetica",	"Lucida	Grande",	sans-serif;
+color: black;
+height:100%;
+background-position:top;
+background-repeat: no-repeat;
+background-size: cover;
+
+
+
+}
+
+#exampleInputEmail1{
+
+width: 350px;
+height: 35px;
+margin-left: 25px;
+border-radius: 8px;
+margin-top: 10px;
+font-size: 16px;
+font-family: "serif";
+
+
+}
+
+#container-xl{
+
+     
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center
+
+}
+
+img{
+
+
+margin-top: 45px;
+margin-bottom: 25px;
+padding-left: 45px;
+
+}
+
+#enviar{
+height: 35px;
+width: 350px;
+font-size: 16px;
+margin-left: 25px;
+border-radius: 15px;
+margin-top:15px;
+border-color: white;
+background: #5F9EA0;
+}
+
+
+#formulario{
+
+
+background-color:white ;
+margin-top: 100px;
+border-radius: 15px;
+height:350px; 
+width: 400px;
+
+}
+
+#ca{
+
+font-family: serif;
+font-style: italic;
+font-size: 16px;
+
+}
+#in{
+
+font-family: serif;
+font-style: italic;
+font-size: 16px;
+
+
+
+}
+
+#titulo{
+
+font-family: Showcard Gothic;
+font-size: 25px;
+padding-left: 10px;
+padding-right: 15px;
+
+}
+
+#user_alerta{
+
+    width: 400px;
+    top:120px;
+    z-index: 1;
+	position:absolute;
+
+
+
+}
+
+#footer{
+
+
+width: 100%;
+height: 35px;
+z-index: 2;
+background-color:#DCDCDC;
+position: fixed;
+bottom: 0;
+
+
+}
+
+
+#barra{
+
+
+height: 65px;
+
+
+}
