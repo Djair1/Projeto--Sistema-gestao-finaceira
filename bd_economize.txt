@@ -86,3 +86,14 @@ saldo varchar(30),
 data varchar(30),
 PRIMARY KEY (id)
 );
+
+/////////////////tabela de lembretes criptografadas////////////////
+
+
+CREATE TABLE lembretes(
+id int(4) AUTO_INCREMENT,
+email varchar(50) NOT NULL,
+lembrete varchar(1000),
+data varchar(30),
+PRIMARY KEY (id)
+);

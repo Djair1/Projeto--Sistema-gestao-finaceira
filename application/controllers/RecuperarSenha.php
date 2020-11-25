@@ -18,11 +18,26 @@ class RecuperarSenha extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
+	public function index(){
 
-		$this->load->view('recuperarSenha');
-		$this->session->set_userdata("alerta", "");
+		$id = $this->session->userdata("id");
+		$email = $this->session->userdata("usuario");
+
+		if (strlen($email)!=0) {
+
+			redirect('Painel');
+
+			
+		}else{
+
+
+			$this->load->view('recuperarSenha');
+			$this->session->set_userdata("alerta", "");
+
+
+		}
+
+
 
 	}
 
@@ -39,59 +54,56 @@ class RecuperarSenha extends CI_Controller {
 
 	private function verificarEmail($email){
 
-		$emailinvalido=true;
+		
 		$this->load->model('UsuarioModel');
-
-   //retornar dados salvos atraves do model cadastromodel
 		$busca = $this->UsuarioModel->carregar_dados(); 
+		$info=true;
+		$senha;
 
-if ($busca->num_rows()==0) {
-	$this->session->set_userdata("alerta", " Endereço de E-mail não encontrado !");
-				redirect('RecuperarSenha');
-				exit();
-			}
+		if ($busca->num_rows()==0) {
+			$this->session->set_userdata("alerta", " Endereço de E-mail não encontrado !");
+			redirect('RecuperarSenha');
+			exit();
+		}
 
 		foreach  ( $busca -> result_array ()  as  $row ) 
 		{ 
 
 			if ($row['email']==$email) {
-
-				$this->enviar_email( $email);
-				$emailinvalido=false;
+				$senha = $row['senha'];
+				$info=false;
+				$this->enviar_email( $email,$senha);
 
 			}
 
 
 
 		}
-		if ( $emailinvalido==true & $row['email']!=$email) {
-			
-			
-			$this->session->set_userdata("alerta", " Endereço de E-mail não encontrado. !");
+		if ($info) {
+			$this->session->set_userdata("alerta", " Entre com o seu email já cadastrado. !");
 			redirect('RecuperarSenha');
 			exit();
 		}
+
+		
 
 
 
 
 	}
 
-	private function enviar_email($email)
-	{
+
+
+	private function enviar_email($email,$senha){
 
 		$this->load->library('email');
 
-		$this->email->from('example@example.com', 'Desenvolvedor');
+		$this->email->from('economize.cf@outlook.com', 'Desenvolvedor');
 		$this->email->to($email);
-//$this->email->cc('another@another-example.com');
-//$this->email->bcc('them@their-example.com');
-
 		$this->email->subject('Email Test');
 		$this->email->message('Testing the email class.');
 
 		$this->email->send();
-
 
 
 	}

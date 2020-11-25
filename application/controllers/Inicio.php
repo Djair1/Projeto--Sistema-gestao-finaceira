@@ -119,8 +119,8 @@ class Inicio extends CI_Controller {
 
 	}
 
-public function data()
-	{
+public function data(){
+
 
 		$one= new DateTime('2012-06-01');
 		$two = new DateTime('2012-07-10');
@@ -131,13 +131,8 @@ public function data()
 		echo '........';
 		echo date("d/m/Y");
 
+	
 	   }
 
-	   public function teste(){
-	  
-       $this->load->view('dashboard');
-
-
-	   }
-
+	 
     }

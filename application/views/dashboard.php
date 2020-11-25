@@ -31,7 +31,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	src="https://www.google.com/jsapi"></script>
 
   <script type="text/javascript">
-    
+
+function lembrete(){
+
+
+$('#Lembretes').alert('show');
+
+}
+  
 function aviso() {
       $('.alert-danger').alert('close');
     }
@@ -67,24 +74,33 @@ function addespesa(){
 	</div>
 
 
-<div class="alert alert-danger" style="z-index: 3; position: absolute; width: 100%">
+<div class="alert alert-danger" style="z-index: 6; position: absolute; width: 100%">
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>Atenção !</strong><?php if ($this->session->userdata("avisoSenha")!="") {echo " ".$this->session->userdata("avisoSenha");}else{
     echo"<script> $('.alert-danger').alert('close');</script> ";
   }?>
 </div>
 
-
-
 	
 <img id="fundo" src="<?php echo base_url('public/imagens/slide/02.jpg');?>">
 <div id="painel" class=".container">
 <div id="menu" class="vertical-menu">
   <a href="#" class="active">MENU</a>
-  <a href="#"> Lembretes</a>
+  <a href="#" data-toggle= 'modal' data-target='#Lembretes'> Lembrete</a>
   <a href="#" data-toggle= 'modal' data-target='#h_renda'> Histórico de Renda</a>
   <a href="#" data-toggle= 'modal' data-target='#h_despesa'> Histórico de Despesas</a>
   <a href="<?php echo site_url('GerirFinancas/gerar_pdf_renda')  ?>" > Gerar relatório Atual</a>
+</div>
+
+<div class="alert alert-light" role="alert" style="z-index: 3;width: 27%; margin-left: 50%;margin-top: 5px">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <h6 class="alert-heading" style="margin-left: 121px">LEMBRETE!</h6>
+  <hr>
+  <p style="color:black"><?php if ($this->session->userdata('mensagemLembrete')!="") {echo " ".$this->session->userdata('mensagemLembrete');}else{
+    echo"<script> $('.alert-light').alert('close');</script> ";
+  }?></p>
+  <hr>
+  <p style="color:black" class="mb-0"><?php echo " Lembrete salvo no dia ".$this->session->userdata('dataLembrete').".";?></p>
 </div>
 
 
@@ -99,19 +115,17 @@ function addespesa(){
 <br><br>
 <div class="container">
   <div class="row">
-    <div1 class="col-sm">
-      <center><p1><?php if ($this->session->userdata("valorReceitaFixaAtual")!=""){echo "R$" .$this->session->userdata("valorReceitaFixaAtual");}else{echo "R$ 0.00";}?></p1></center>
-      <center><p2>Média da Renda</p2></center>
-    </div1>
-
-    <div1 class="col-sm">
-      <center><p1><?php if ($this->session->userdata("valorDespesaFixaAtual")!=""){echo "R$" .$this->session->userdata("valorDespesaFixaAtual");}else{echo "R$ 0.00";}?></p1></center>
-       <center><p2> Média da Despesa</p2></center> 
-    </div1>
-
-    <div1 class="col-sm">
+    <div1 class="col-4">
       <center><p1><?php if ($this->session->userdata("valorsaldo")!=""){echo "R$" .$this->session->userdata("valorsaldo");}else{echo "R$ 0.00";}?></p1></center>
       <center><p2>Saldo Total Atual</p2></center> 
+    </div1>
+    <div1 class="col-4">
+      <center><p1><?php if ($this->session->userdata("valorReceitaFixaAtual")!=""){echo "R$" .$this->session->userdata("valorReceitaFixaAtual");}else{echo "R$ 0.00";}?></p1></center>
+      <center><p2>Última Renda Cadastrada</p2></center>
+    </div1>
+    <div1 class="col-4">
+      <center><p1><?php if ($this->session->userdata("valorDespesaFixaAtual")!=""){echo "R$" .$this->session->userdata("valorDespesaFixaAtual");}else{echo "R$ 0.00";}?></p1></center>
+       <center><p2> Última Despesa Cadastrada</p2></center> 
     </div1>
   </div>
 </div>
@@ -142,6 +156,42 @@ function addespesa(){
 
   </div>
 
+<!--modal lembrete-->
+
+<div class="modal" data-backdrop="static" id="Lembretes" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="padding-top:20px ;">
+    <div class="modal-content">
+      <!----------------------------------------------------------->
+
+      <div class="modal-header" style="background-color:#FFA500">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 25px;margin-left: 185px;color: white">Lembrete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="<?php echo site_url('Painel/salvarLembrete'); ?>" method="post">
+          <br>
+          
+<div class="form-group">
+    <label for="exampleFormControlTextarea1">Salve um lembrete abaixo com uma data selecionada caso necessite.</label>
+    <input type="date" name="data" style="width: 150px" required>
+    <textarea name="campo_lembrete" class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300" required></textarea>
+  </div>
+
+          <button style="width:470px ;height:35px ;font-size: 17px; border-radius: 5px ; background-color:#00C5CD;" type="submit" value="submit" class="btn btn-primary">SALVAR</button>
+        </form>
+
+      </div>
+      
+    </div>  
+  </div>
+</div>
+
+<!-- fim Modal -->
+
+
 <!--modal alterar senha-->
 
 <div class="modal" data-backdrop="static" id="sitemodal" tabindex="-1" role="dialog">
@@ -149,7 +199,7 @@ function addespesa(){
     <div class="modal-content">
       <!----------------------------------------------------------->
 
-      <div class="modal-header">
+      <div class="modal-header" style="background-color:#B0C4DE">
         <h5 class="modal-title" id="exampleModalLabel" style="font-size: 25px;margin-left: 155px">Alterar Senha</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -193,7 +243,7 @@ function addespesa(){
       <!----------------------------------------------------------->
 
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModal_Label_cadastro_renda" style="margin-left:280px ">CADASTRO RENDA/ DESPESA</h5>
+        <h5 class="modal-title" id="exampleModal_Label_cadastro_renda" style="margin-left:300px ">CADASTRO RENDA/ DESPESA</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -202,10 +252,11 @@ function addespesa(){
 
         <form action="<?php echo site_url('GerirFinancas/adicionar_valores'); ?>  " method="post">
 
+          <div style="background-color:#008080; color: white">
           <br>
 
-          <div class="form-group">
-            <label for="exampleInput" style="margin-left: 340px;">RENDA FIXA MENSAL</label>
+          <div class="form-group" style="margin-left: 25px;">
+            <label for="exampleInput" style="margin-left: 320px;">RENDA FIXA MENSAL</label>
             <br><br>
             <label for="exampleInput">Faça uma breve descrição sobre sua renda fixa mensal, com seu devido valor para auxiliar nas suas futuras analises.</label>
             <br><br>
@@ -219,12 +270,14 @@ function addespesa(){
            </div>
          </div>
          <br>
+          </div>
          <hr>
+         <div style="background-color:#00CED1; color: white">
          <br>
-         <div class="form-group">
-          <label for="exampleInput" style="margin-left: 320px;">RENDA VARIAVEL MENSAL</label>
+         <div class="form-group" style="margin-left: 25px;">
+          <label for="exampleInput" style="margin-left: 305px;">RENDA VARIAVEL MENSAL</label>
           <br><br>
-          <label for="exampleInput">Da mesma forma descreva sua renda variável mensal com seu devido valor, você poderá inserir até (5) rendas variáveis com seus respectivos valores.</label><br>
+          <label for="exampleInput">Da mesma forma descreva sua renda variável mensal com seu devido valor, você poderá inserir até (5) rendas<br>variáveis com seus respectivos valores.</label><br>
 
           <br>
 
@@ -286,13 +339,15 @@ function addespesa(){
         </div>
       </div>
       <br>
+       </div>
       <hr>
+      <div style="background-color:#778899; color: white">
 
       <br>
-      <div class="form-group">
+      <div class="form-group" style="margin-left: 25px;">
         <label for="exampleInput" style="margin-left: 38%">DESPESA FIXA MENSAL</label>
         <br><br>
-        <label for="exampleInput">Faça uma breve descrição sobre sua Despesa fixa mensal, com seu devido valor para auxiliar nas suas futuras analises.</label><br>
+        <label for="exampleInput">Faça uma breve descrição sobre sua Despesa fixa mensal, com seu devido valor para auxiliar nas suas futuras<br> analises.</label><br>
 
         <br>
         <div class="row">
@@ -307,11 +362,13 @@ function addespesa(){
       </div>
       <br>
       <br>
+      </div>
       <hr>
+      <div style="background-color: #A9A9A9; color: white">
       <br>
 
 
-      <div class="form-group">
+      <div class="form-group" style="margin-left: 25px;">
         <label for="exampleInput" style="margin-left: 36%">DESPESA VARIAVEL MENSAL</label>
         <br><br>
         <label for="exampleInput">Descreva também sua despesa variável mensal com seu devido valor, você poderá inserir até (5) despesas variáveis com seus respectivos valores.</label><br><br>
@@ -374,6 +431,7 @@ function addespesa(){
 
     <br>
     <br>
+    </div>
     <hr>
     <div class="row">
       <div class="col">
@@ -401,8 +459,8 @@ function addespesa(){
     <div class="modal-content">
       <!----------------------------------------------------------->
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel_1" style="margin-left: 130px;">DESATIVAR CONTA!</h5>
+      <div class="modal-header" style="background-color: #DCDCDC">
+        <h5 class="modal-title" id="exampleModalLabel_1" style="margin-left: 125px;font-size: 23px">DESATIVAR CONTA!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -438,13 +496,19 @@ function addespesa(){
       <!----------------------------------------------------------->
 
       <div class="modal-header">
-        <h2 class="modal-title" style="margin-left: 450px">Histórico_da_Renda</h2>
+        <h2 class="modal-title" style="margin-left: 450px">Histórico da Renda</h2>
         <br>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" style="height: 550px; overflow-y: auto;">
+      <div class="alert alert-success" role="alert"><h3>
+  <?php if ($this->session->userdata("TotalReceita")!="") {
+   echo "Saldo Total Cadastrado"." ".$this->session->userdata("TotalReceita")."R$";
+  }else{echo "Saldo Total Cadastrado 0,00 R$";}?>
+       </h3>
+</div>
+      <div class="modal-body" style="height: 550px; overflow-y: auto; margin-right: 25px">
 
         
 
@@ -466,7 +530,6 @@ function addespesa(){
 <th><center>4° RENDA VARIAVEL</center></th>
 <th><center>DESCRIÇÃO</center></th>
 <th><center>5° RENDA VARIAVEL</center></th>
-<th><center>SALDO</center></th>
 
 
 </tr>
@@ -510,7 +573,7 @@ if (floatval(base64_decode($row['renda_fixa_mensal'])) + floatval(base64_decode(
 
 <td style="background-color:#DCDCDC"><center><?=number_format(floatval(base64_decode($row['renda_variavel_mensal_5'])), 2, ',', '.') ;?> R$</center></td>
 
-<td style="background-color:#A9A9A9"><center><?=number_format(floatval(base64_decode($row['saldo'])));?> R$</center></td>
+
 
 
 
@@ -547,12 +610,21 @@ if (floatval(base64_decode($row['renda_fixa_mensal'])) + floatval(base64_decode(
       <!----------------------------------------------------------->
 
       <div class="modal-header">
-        <h2 class="modal-title"style="margin-left: 450px">Histórico_de_Despesas</h2>
+        <h2 class="modal-title"style="margin-left: 450px">Histórico de Despesas</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" style="height: 550px; overflow-y: auto;">
+<div class="alert alert-danger" role="alert"><h3>
+ 
+ <?php if ($this->session->userdata("TotalDespesa")!="") {
+  echo "Despesa total Cadastrada"." ".$this->session->userdata("TotalDespesa")."R$";
+ }else{echo "Despesa total Cadastrada 0,00 R$";}
+       ?> 
+
+</h3>
+ </div>
+      <div class="modal-body" style="height: 550px; overflow-y: auto;margin-right: 25px">
 
 
 
@@ -575,7 +647,6 @@ if (floatval(base64_decode($row['renda_fixa_mensal'])) + floatval(base64_decode(
 <th><center>4° DESPESA VARIAVEL</center></th>
 <th><center>DESCRIÇÃO</center></th>
 <th><center>5° DESPESA VARIAVEL</center></th>
-<th><center>SALDO</center></th>
 
 
 </tr>
@@ -620,7 +691,7 @@ if (floatval(base64_decode($row['despesa_fixa_mensal']))+floatval(base64_decode(
 
 <td style="background-color:#DCDCDC"><center><?=number_format(floatval(base64_decode($row['despesa_variavel_mensal_5'])), 2, ',', '.') ;?> R$</center></td>
 
-<td style="background-color:#A9A9A9"><center><?=number_format(floatval(base64_decode($row['saldo'])));?> R$</center></td>
+
 
 
 
@@ -647,7 +718,7 @@ if (floatval(base64_decode($row['despesa_fixa_mensal']))+floatval(base64_decode(
 
 
 <script type="text/javascript">
-  
+
 ////////////////////////////////o campo e ocultado/////////////////////////////////////////////////////
 
 $("#linha_renda2").css("display", "none");

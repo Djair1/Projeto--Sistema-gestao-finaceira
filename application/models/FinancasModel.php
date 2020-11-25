@@ -100,6 +100,29 @@ class FinancasModel extends CI_Model {
 
 	}
 
+public function persistirLembrete($email ,$lembrete,$data){
+
+
+
+
+	$Emailb64=base64_encode($email);
+	$lembreteb64=base64_encode($lembrete);
+	$datab64=base64_encode($data);
+	
+    $dados = [$Emailb64 ,$lembreteb64,$datab64];
+
+    $this->db->query('INSERT INTO lembretes(email,lembrete,data) VALUES(?,?,?)',$dados);
+
+
+
+
+}
+
+
+public function buscarLembrete()
+{
+	return $query = $this->db->query('SELECT * FROM lembretes');
+}
 
 
 }

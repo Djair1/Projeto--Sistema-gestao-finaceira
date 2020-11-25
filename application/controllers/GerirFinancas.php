@@ -12,7 +12,6 @@ class GerirFinancas extends CI_Controller {
 	public function adicionar_valores(){
 
 
-
      //descriçoes das rendas inseridas pelo usuario
 
 		$_dr = $this->input->post("r");
@@ -75,7 +74,7 @@ class GerirFinancas extends CI_Controller {
 		$_4dvm = str_replace(',','.',str_replace('.','',$despesaVariavelQuatro));
 		$_5dvm = str_replace(',','.',str_replace('.','',$despesaVariavelCinco));
 		
-		$this->load->model('FinancasModel');
+	
 		$saldo = ((float)$rfm +(float)$_1rv +(float)$_2rv +(float)$_3rv +(float)$_4rv +(float)$_5rv -(float)$dfm -(float)$_1dvm -(float)$_2dvm -(float)$_3dvm -(float)$_4dvm -(float)$_5dvm);
 
 
@@ -85,138 +84,63 @@ class GerirFinancas extends CI_Controller {
 		}
 
 
-		$this->FinancasModel->gravar_financas_usuario($this->session->userdata("usuario"),$_dr, $rfm, $_dp, $dfm , $_1dr,floatval($_1rv), $_2dr, floatval($_2rv) , $_3dr,floatval($_3rv) , $_4dr, floatval($_4rv) , $_5dr, floatval($_5rv) , $_1dp, floatval($_1dvm) ,$_2dp,floatval($_2dvm) ,$_3dp,floatval($_3dvm) , $_4dp, floatval($_4dvm) ,$_5dp, floatval($_5dvm) ,$saldo);
-		redirect('Painel');
-		exit();
-
-	}
-
-
-	public function gerar_pdf_renda(){
-
-		$hoje = date('m/y');
-
 		$this->load->model('FinancasModel');
 		$get_dados = $this->FinancasModel->carregar_financas();
-
-		$usuario_dados = array();
-		$usuario_banco = array();
-
-		foreach ($get_dados -> result_array() as $row) {
-
-			$email =  base64_decode($row['email']);
-
-			if ($this->session->userdata("usuario") == $email ){
-
-				
-				$stamp = strtotime(str_replace("/","-",base64_decode($row['data'])));
-				$data = date('m/y',$stamp);
-
-
-				if ($hoje == $data) {
-					array_push($usuario_banco,$row);
-				}	
-
-			}
-
-		}
-
-		$usuario_dados = array_reverse($usuario_banco);
-
-		$zebrado = false ;
-
-		$pdf = new FPDF();
-		$pdf->Addpage('L','A4');
-		$pdf->setFont('Arial','B',23);
-		$pdf->MultiCell(0,0,utf8_decode('Relatório da Renda') , $border=0, $align="C", $fill=false);
-		$pdf->Ln(20);
-
-		$pdf->setFont('Arial','',9);
-		$pdf->cell(20,5,utf8_decode("DATA") ,1,0,"c");
-
-		$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
-		$pdf->Cell(45,5,utf8_decode("RENDA FIXA"),1,0,"c");
-		$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
-		$pdf->Cell(45,5,utf8_decode("1° RENDA VARIAVEL"),1,0,"c");
-		$pdf->Ln();
-		
-
-
-		foreach ($usuario_dados as $row) {
-
-			if (!$zebrado){
-				$pdf->SetFillColor(220,220,220);
-				$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
-				$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_fixa_mensal'])) , 1 , "L" , false,1);
-				$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_fixa_mensal'])), 2, ',', '.') , 1 , "L" , false,1);
-				$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_1'])) , 1 , "L" , false,1);
-				$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal'])), 2, ',', '.') , 1 , "L" , false,1);
-				$pdf->Ln();
-				$zebrado = true ;
-
-			} else {
-				$pdf->SetFillColor(255,255,255);
-				$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
-				$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_fixa_mensal'])) , 1 , "L" , false,1);
-				$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_fixa_mensal'])), 2, ',', '.') , 1 , "L" , false,1);
-				$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_1'])) , 1 , "L" , false,1);
-				$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal'])), 2, ',', '.') , 1 , "L" , false,1);
-				$pdf->Ln();
-				$zebrado = false ;
-
-			}
+		$this->FinancasModel->gravar_financas_usuario($this->session->userdata("usuario"),$_dr, $rfm, $_dp, $dfm , $_1dr,floatval($_1rv), $_2dr, floatval($_2rv) , $_3dr,floatval($_3rv) , $_4dr, floatval($_4rv) , $_5dr, floatval($_5rv) , $_1dp, floatval($_1dvm) ,$_2dp,floatval($_2dvm) ,$_3dp,floatval($_3dvm) , $_4dp, floatval($_4dvm) ,$_5dp, floatval($_5dvm) ,$saldo);
+			redirect('Painel');
+			exit();
 
 		}
 
 
-		$pdf->Ln(15);
-		$pdf->setFont('Arial','',9);
-		$pdf->cell(20,5,utf8_decode("DATA") ,1,0,"c");
+		public function gerar_pdf_renda(){
 
-		$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
-		$pdf->Cell(45,5,utf8_decode("2° RENDA VARIAVEL"),1,0,"c");
-		$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
-		$pdf->Cell(45,5,utf8_decode("3° RENDA VARIAVEL"),1,0,"c");
-		$pdf->Ln();
-		
+			$hoje = date('m/y');
+
+			$this->load->model('FinancasModel');
+			$get_dados = $this->FinancasModel->carregar_financas();
+
+			$usuario_dados = array();
+			$usuario_banco = array();
+
+			foreach ($get_dados -> result_array() as $row) {
+
+				$email =  base64_decode($row['email']);
+
+				if ($this->session->userdata("usuario") == $email ){
 
 
-		foreach ($usuario_dados as $row) {
+					$stamp = strtotime(str_replace("/","-",base64_decode($row['data'])));
+					$data = date('m/y',$stamp);
 
-			if (!$zebrado){
-				$pdf->SetFillColor(220,220,220);
-				$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
-				$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_2'])) , 1 , "L" , false,1);
-				$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_2'])), 2, ',', '.') , 1 , "L" , false,1);
-				$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_3'])) , 1 , "L" , false,1);
-				$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_3'])), 2, ',', '.') , 1 , "L" , false,1);
-				$pdf->Ln();
-				$zebrado = true ;
 
-			} else {
-				$pdf->SetFillColor(255,255,255);
-				$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
-				$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_2'])) , 1 , "L" , false,1);
-				$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_2'])), 2, ',', '.') , 1 , "L" , false,1);
-				$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_3'])) , 1 , "L" , false,1);
-				$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_3'])), 2, ',', '.') , 1 , "L" , false,1);
-				$pdf->Ln();
-				$zebrado = false ;}
+					if ($hoje == $data) {
+						array_push($usuario_banco,$row);
+					}	
+
+				}
 
 			}
 
+			$usuario_dados = array_reverse($usuario_banco);
 
+			$zebrado = false ;
 
-			$pdf->Ln(15);
+			$pdf = new FPDF();
+			$pdf->Addpage('L','A4');
+			$pdf->setFont('Arial','B',23);
+			$pdf->MultiCell(0,0,utf8_decode('Relatório da Renda') , $border=0, $align="C", $fill=false);
+			$pdf->Ln(20);
+
 			$pdf->setFont('Arial','',9);
 			$pdf->cell(20,5,utf8_decode("DATA") ,1,0,"c");
 
 			$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
-			$pdf->Cell(45,5,utf8_decode("4° RENDA VARIAVEL"),1,0,"c");
+			$pdf->Cell(45,5,utf8_decode("RENDA FIXA"),1,0,"c");
 			$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
-			$pdf->Cell(45,5,utf8_decode("5° RENDA VARIAVEL"),1,0,"c");
+			$pdf->Cell(45,5,utf8_decode("1° RENDA VARIAVEL"),1,0,"c");
 			$pdf->Ln();
-			
+
 
 
 			foreach ($usuario_dados as $row) {
@@ -224,40 +148,87 @@ class GerirFinancas extends CI_Controller {
 				if (!$zebrado){
 					$pdf->SetFillColor(220,220,220);
 					$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
-					$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_4'])) , 1 , "L" , false,1);
-					$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_4'])), 2, ',', '.') , 1 , "L" , false,1);
-					$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_5'])) , 1 , "L" , false,1);
-					$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_5'])), 2, ',', '.') , 1 , "L" , false,1);
+					$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_fixa_mensal'])) , 1 , "L" , false,1);
+					$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_fixa_mensal'])), 2, ',', '.') , 1 , "L" , false,1);
+					$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_1'])) , 1 , "L" , false,1);
+					$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal'])), 2, ',', '.') , 1 , "L" , false,1);
 					$pdf->Ln();
 					$zebrado = true ;
-
 
 				} else {
 					$pdf->SetFillColor(255,255,255);
 					$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
-					$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_4'])) , 1 , "L" , false,1);
-					$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_4'])), 2, ',', '.') , 1 , "L" , false,1);
-					$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_5'])) , 1 , "L" , false,1);
-					$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_5'])), 2, ',', '.') , 1 , "L" , false,1);
+					$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_fixa_mensal'])) , 1 , "L" , false,1);
+					$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_fixa_mensal'])), 2, ',', '.') , 1 , "L" , false,1);
+					$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_1'])) , 1 , "L" , false,1);
+					$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal'])), 2, ',', '.') , 1 , "L" , false,1);
+					$pdf->Ln();
+					$zebrado = false ;
+
+				}
+
+			}
+
+
+			$pdf->Ln(15);
+			$pdf->setFont('Arial','',9);
+			$pdf->cell(20,5,utf8_decode("DATA") ,1,0,"c");
+
+			$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
+			$pdf->Cell(45,5,utf8_decode("2° RENDA VARIAVEL"),1,0,"c");
+			$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
+			$pdf->Cell(45,5,utf8_decode("3° RENDA VARIAVEL"),1,0,"c");
+			$pdf->Ln();
+
+
+
+			foreach ($usuario_dados as $row) {
+
+				if (!$zebrado){
+					$pdf->SetFillColor(220,220,220);
+					$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
+					$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_2'])) , 1 , "L" , false,1);
+					$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_2'])), 2, ',', '.') , 1 , "L" , false,1);
+					$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_3'])) , 1 , "L" , false,1);
+					$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_3'])), 2, ',', '.') , 1 , "L" , false,1);
+					$pdf->Ln();
+					$zebrado = true ;
+
+				} else {
+					$pdf->SetFillColor(255,255,255);
+					$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
+					$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_2'])) , 1 , "L" , false,1);
+					$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_2'])), 2, ',', '.') , 1 , "L" , false,1);
+					$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_3'])) , 1 , "L" , false,1);
+					$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_3'])), 2, ',', '.') , 1 , "L" , false,1);
 					$pdf->Ln();
 					$zebrado = false ;}
 
 				}
 
 
-				$pdf->Ln(10);
+
+				$pdf->Ln(15);
 				$pdf->setFont('Arial','',9);
 				$pdf->cell(20,5,utf8_decode("DATA") ,1,0,"c");
-				$pdf->cell(85,5,utf8_decode("SALDO"),1,0,"c");
+
+				$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
+				$pdf->Cell(45,5,utf8_decode("4° RENDA VARIAVEL"),1,0,"c");
+				$pdf->cell(85,5,utf8_decode("DESCRIÇÃO"),1,0,"c");
+				$pdf->Cell(45,5,utf8_decode("5° RENDA VARIAVEL"),1,0,"c");
 				$pdf->Ln();
-				
+
+
 
 				foreach ($usuario_dados as $row) {
 
 					if (!$zebrado){
 						$pdf->SetFillColor(220,220,220);
 						$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
-						$pdf->cell(85,5,number_format(floatval(base64_decode($row['saldo'])), 2, ',', '.') , 1 , "L" , false,1);
+						$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_4'])) , 1 , "L" , false,1);
+						$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_4'])), 2, ',', '.') , 1 , "L" , false,1);
+						$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_5'])) , 1 , "L" , false,1);
+						$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_5'])), 2, ',', '.') , 1 , "L" , false,1);
 						$pdf->Ln();
 						$zebrado = true ;
 
@@ -265,25 +236,55 @@ class GerirFinancas extends CI_Controller {
 					} else {
 						$pdf->SetFillColor(255,255,255);
 						$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
-						$pdf->cell(85,5,number_format(floatval(base64_decode($row['saldo'])), 2, ',', '.') , 1 , "L" , false,1);
+						$pdf->Cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_4'])) , 1 , "L" , false,1);
+						$pdf->Cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_4'])), 2, ',', '.') , 1 , "L" , false,1);
+						$pdf->cell(85,5,utf8_decode(base64_decode($row['descricao_renda_variavel_mensal_5'])) , 1 , "L" , false,1);
+						$pdf->cell(45,5,number_format(floatval(base64_decode($row['renda_variavel_mensal_5'])), 2, ',', '.') , 1 , "L" , false,1);
 						$pdf->Ln();
 						$zebrado = false ;}
 
-
-
-
 					}
+
+
+					$pdf->Ln(10);
+					$pdf->setFont('Arial','',9);
+					$pdf->cell(20,5,utf8_decode("DATA") ,1,0,"c");
+					$pdf->cell(85,5,utf8_decode("SALDO"),1,0,"c");
+					$pdf->Ln();
+
+
+					foreach ($usuario_dados as $row) {
+
+						if (!$zebrado){
+							$pdf->SetFillColor(220,220,220);
+							$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
+							$pdf->cell(85,5,number_format(floatval(base64_decode($row['saldo'])), 2, ',', '.') , 1 , "L" , false,1);
+							$pdf->Ln();
+							$zebrado = true ;
+
+
+						} else {
+							$pdf->SetFillColor(255,255,255);
+							$pdf->cell(20,5,utf8_decode(base64_decode($row['data'])),1,0,"c",1);
+							$pdf->cell(85,5,number_format(floatval(base64_decode($row['saldo'])), 2, ',', '.') , 1 , "L" , false,1);
+							$pdf->Ln();
+							$zebrado = false ;}
+
+
+
+
+						}
 
 //$pdf->Output();
 
-					$pdf->Output("I","Relatório da Renda.pdf",true);
+						$pdf->Output("I","Relatório da Renda.pdf",true);
 
-				}
+					}
 
 //number_format($valorReceita, 2, ',', '.');
 
 
-			}
+				}
 
 
 //redirecionar passando dados
